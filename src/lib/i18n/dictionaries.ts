@@ -6,6 +6,8 @@ export interface Dictionary {
     skills: string;
     projects: string;
     upcoming: string;
+    certificates: string;
+    competitions: string;
     education: string;
     achievements: string;
     contact: string;
@@ -40,15 +42,29 @@ export interface Dictionary {
     githubEyebrow: string;
     githubHeading: string;
     githubEmpty: string;
-    writingEyebrow: string;
-    writingHeading: string;
-    writingEmpty: string;
   };
   upcomingProjects: {
     eyebrow: string;
     heading: string;
     subtitle: string;
     etaLabel: string;
+    emptyTitle: string;
+    emptyDescription: string;
+  };
+  certificates: {
+    eyebrow: string;
+    heading: string;
+    subtitle: string;
+    completedTitle: string;
+    inProgressTitle: string;
+    emptyTitle: string;
+    emptyDescription: string;
+    issuedLabel: string;
+  };
+  competitions: {
+    eyebrow: string;
+    heading: string;
+    subtitle: string;
     emptyTitle: string;
     emptyDescription: string;
   };
@@ -99,6 +115,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       skills: "Skills",
       projects: "Projects",
       upcoming: "Upcoming",
+      certificates: "Certificates",
+      competitions: "Competitions",
       education: "Education",
       achievements: "Achievements",
       contact: "Contact",
@@ -133,9 +151,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
       githubEyebrow: "LIVE · GITHUB",
       githubHeading: "Latest activity",
       githubEmpty: "Couldn't reach the GitHub API right now — try again shortly.",
-      writingEyebrow: "LIVE · WRITING",
-      writingHeading: "Latest from Medium",
-      writingEmpty: "No Medium posts yet.",
     },
     upcomingProjects: {
       eyebrow: "04 · UPCOMING",
@@ -145,16 +160,33 @@ export const dictionaries: Record<Locale, Dictionary> = {
       emptyTitle: "Nothing queued up publicly yet",
       emptyDescription: "New builds land here the moment they're underway. Check back soon, or ask Byte what's in the works.",
     },
+    certificates: {
+      eyebrow: "05 · CERTIFICATES",
+      heading: "Certifications",
+      subtitle: "Courses and certifications, completed and in progress.",
+      completedTitle: "Completed",
+      inProgressTitle: "In Progress",
+      emptyTitle: "Certificates coming soon",
+      emptyDescription: "This section is ready to go — certificates will be added here shortly.",
+      issuedLabel: "Issued by",
+    },
+    competitions: {
+      eyebrow: "06 · COMPETITIONS",
+      heading: "Competitions",
+      subtitle: "Competitions and hackathons applied to or entered.",
+      emptyTitle: "Nothing listed yet",
+      emptyDescription: "Competition entries will be added here shortly.",
+    },
     education: {
-      eyebrow: "05 · EDUCATION",
+      eyebrow: "07 · EDUCATION",
       heading: "Academic path",
     },
     achievements: {
-      eyebrow: "06 · ACHIEVEMENTS",
+      eyebrow: "08 · ACHIEVEMENTS",
       heading: "Milestones so far",
     },
     contact: {
-      eyebrow: "07 · CONTACT",
+      eyebrow: "09 · CONTACT",
       heading: "Let's build something worth shipping.",
       subheading: "Open to internships, collaborations and interesting problems in AI or full-stack engineering.",
       formNote: "OR SEND A MESSAGE DIRECTLY",
@@ -189,6 +221,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       skills: "مہارتیں",
       projects: "پراجیکٹس",
       upcoming: "آئندہ",
+      certificates: "اسناد",
+      competitions: "مقابلے",
       education: "تعلیم",
       achievements: "کامیابیاں",
       contact: "رابطہ",
@@ -223,9 +257,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
       githubEyebrow: "لائیو · گٹ ہب",
       githubHeading: "تازہ ترین سرگرمی",
       githubEmpty: "اس وقت GitHub API تک رسائی ممکن نہیں — کچھ دیر بعد دوبارہ کوشش کریں۔",
-      writingEyebrow: "لائیو · تحریریں",
-      writingHeading: "Medium سے تازہ ترین",
-      writingEmpty: "ابھی تک کوئی Medium پوسٹ موجود نہیں۔",
     },
     upcomingProjects: {
       eyebrow: "۰۴ · آئندہ",
@@ -235,16 +266,33 @@ export const dictionaries: Record<Locale, Dictionary> = {
       emptyTitle: "ابھی عوامی طور پر کچھ بھی زیرِ تکمیل نہیں",
       emptyDescription: "نئے پراجیکٹس شروع ہوتے ہی یہاں شامل کیے جائیں گے۔ کچھ دیر بعد دوبارہ دیکھیں، یا بائٹ سے پوچھیں کہ اس وقت کیا ہو رہا ہے۔",
     },
+    certificates: {
+      eyebrow: "۰۵ · اسناد",
+      heading: "سرٹیفیکیشنز",
+      subtitle: "مکمل اور زیرِ تکمیل کورسز اور سرٹیفیکیشنز۔",
+      completedTitle: "مکمل شدہ",
+      inProgressTitle: "زیرِ تکمیل",
+      emptyTitle: "سرٹیفیکیٹس جلد شامل کیے جائیں گے",
+      emptyDescription: "یہ سیکشن تیار ہے — سرٹیفیکیٹس جلد یہاں شامل کیے جائیں گے۔",
+      issuedLabel: "جاری کنندہ",
+    },
+    competitions: {
+      eyebrow: "۰۶ · مقابلے",
+      heading: "مقابلے",
+      subtitle: "وہ مقابلے اور ہیکاتھونز جن میں شرکت کی گئی یا اپلائی کیا گیا۔",
+      emptyTitle: "ابھی کچھ بھی درج نہیں",
+      emptyDescription: "مقابلوں کی تفصیلات جلد یہاں شامل کی جائیں گی۔",
+    },
     education: {
-      eyebrow: "۰۵ · تعلیم",
+      eyebrow: "۰۷ · تعلیم",
       heading: "تعلیمی سفر",
     },
     achievements: {
-      eyebrow: "۰۶ · کامیابیاں",
+      eyebrow: "۰۸ · کامیابیاں",
       heading: "اب تک کے سنگ میل",
     },
     contact: {
-      eyebrow: "۰۷ · رابطہ",
+      eyebrow: "۰۹ · رابطہ",
       heading: "آئیں کچھ ایسا بنائیں جو شپ کرنے کے قابل ہو۔",
       subheading: "انٹرن شپس، تعاون اور AI یا فل سٹیک انجینئرنگ کے دلچسپ مسائل کے لیے دستیاب ہوں۔",
       formNote: "یا براہِ راست پیغام بھیجیں",
@@ -279,6 +327,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       skills: "Skills",
       projects: "Projects",
       upcoming: "Aainda",
+      certificates: "Certificates",
+      competitions: "Competitions",
       education: "Taleem",
       achievements: "Kamyabiyan",
       contact: "Rabta",
@@ -313,9 +363,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
       githubEyebrow: "LIVE · GITHUB",
       githubHeading: "Taza tareen activity",
       githubEmpty: "Is waqt GitHub API tak rasai mumkin nahi — thori dair baad dobara koshish karein.",
-      writingEyebrow: "LIVE · WRITING",
-      writingHeading: "Medium se taza tareen",
-      writingEmpty: "Abhi tak koi Medium post maujood nahi.",
     },
     upcomingProjects: {
       eyebrow: "04 · UPCOMING",
@@ -325,16 +372,33 @@ export const dictionaries: Record<Locale, Dictionary> = {
       emptyTitle: "Abhi publicly kuch bhi zair-e-takmeel nahi",
       emptyDescription: "Naye projects shuru hotay hi yahan shamil kiye jayenge. Thori dair baad dobara dekhein, ya Byte se poochein ke is waqt kya ho raha hai.",
     },
+    certificates: {
+      eyebrow: "05 · CERTIFICATES",
+      heading: "Certifications",
+      subtitle: "Mukammal aur zair-e-takmeel courses aur certifications.",
+      completedTitle: "Mukammal",
+      inProgressTitle: "Zair-e-Takmeel",
+      emptyTitle: "Certificates jald shamil kiye jayenge",
+      emptyDescription: "Yeh section tayyar hai — certificates jald yahan shamil kiye jayenge.",
+      issuedLabel: "Jari kunanda",
+    },
+    competitions: {
+      eyebrow: "06 · COMPETITIONS",
+      heading: "Competitions",
+      subtitle: "Wo competitions aur hackathons jin mein shirkat ki gayi ya apply kiya gaya.",
+      emptyTitle: "Abhi kuch bhi darj nahi",
+      emptyDescription: "Competitions ki tafseelat jald yahan shamil ki jayengi.",
+    },
     education: {
-      eyebrow: "05 · EDUCATION",
+      eyebrow: "07 · EDUCATION",
       heading: "Taleemi safar",
     },
     achievements: {
-      eyebrow: "06 · ACHIEVEMENTS",
+      eyebrow: "08 · ACHIEVEMENTS",
       heading: "Ab tak ke sang-e-meel",
     },
     contact: {
-      eyebrow: "07 · CONTACT",
+      eyebrow: "09 · CONTACT",
       heading: "Aayein kuch aisa banayein jo ship karne ke qabil ho.",
       subheading: "Internships, collaborations aur AI ya full-stack engineering ke dilchasp masail ke liye dastyab hoon.",
       formNote: "YA SEEDHA MESSAGE BHEJEIN",

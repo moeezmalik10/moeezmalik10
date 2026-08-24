@@ -14,6 +14,8 @@ export function Nav() {
     { href: "#skills", label: t.nav.skills },
     { href: "#projects", label: t.nav.projects },
     { href: "#upcoming", label: t.nav.upcoming },
+    { href: "#certificates", label: t.nav.certificates },
+    { href: "#competitions", label: t.nav.competitions },
     { href: "#education", label: t.nav.education },
     { href: "#achievements", label: t.nav.achievements },
     { href: "#contact", label: t.nav.contact },
@@ -32,26 +34,26 @@ export function Nav() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between py-5">
-        <a href="#home" className="font-display font-semibold text-lg tracking-tight text-white">
+        <a href="#home" className="font-display font-semibold text-lg tracking-tight text-white shrink-0">
           Moeez<span className="text-violet">.</span>dev
         </a>
-        <nav className="hidden md:flex items-center gap-9 text-sm text-muted font-medium">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-7 text-sm text-muted font-medium">
           {LINKS.map((link) => (
-            <a key={link.href} href={link.href} className="hover:text-white transition-colors">
+            <a key={link.href} href={link.href} className="hover:text-white transition-colors whitespace-nowrap">
               {link.label}
             </a>
           ))}
         </nav>
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4 shrink-0">
           <LanguageSwitcher />
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-full bg-gradient-to-br from-violet to-[#6f4dff] text-white"
+            className="inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-full bg-gradient-to-br from-violet to-[#6f4dff] text-white whitespace-nowrap"
           >
             {t.nav.talk}
           </a>
         </div>
-        <div className="flex md:hidden items-center gap-3">
+        <div className="flex lg:hidden items-center gap-3">
           <LanguageSwitcher />
           <button
             onClick={() => setMobileOpen((v) => !v)}
@@ -64,7 +66,7 @@ export function Nav() {
         </div>
       </div>
       {mobileOpen && (
-        <div className="md:hidden flex flex-col gap-1 px-6 pb-6 bg-surface/95 backdrop-blur-xl mx-4 rounded-2xl border border-line">
+        <div className="lg:hidden flex flex-col gap-1 px-6 pb-6 bg-surface/95 backdrop-blur-xl mx-4 rounded-2xl border border-line max-h-[70vh] overflow-y-auto">
           {LINKS.map((link) => (
             <a
               key={link.href}

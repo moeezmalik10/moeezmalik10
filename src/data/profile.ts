@@ -26,7 +26,6 @@ export const profile: Profile = {
   email: "malikmoeez152@gmail.com",
   whatsapp: "923076138900",
   githubUsername: "moeezmalik10",
-  mediumUsername: "moeezmalik10",
   linkedinUrl: "https://www.linkedin.com/in/muhammad-moeez-malik/",
   tagline: {
     en: "A Deep Learning & Full-Stack developer who builds end-to-end products — from NumPy-only neural nets to production-ready web apps.",
@@ -282,9 +281,8 @@ export const profile: Profile = {
   ],
 
   /**
-   * Projects that are in progress or planned but not shipped yet. Starts
-   * empty on purpose — add entries here as real work begins, following this
-   * shape (status is free text like "In Progress" / "Planned" / "Research"):
+   * Projects in progress or planned but not shipped yet. Add more following
+   * this shape (status is free text like "In Progress" / "Planned" / "Research"):
    *
    * {
    *   slug: "my-next-thing",
@@ -299,5 +297,100 @@ export const profile: Profile = {
    *   tags: ["Python", "PyTorch"],
    * },
    */
-  upcomingProjects: [],
+  upcomingProjects: [
+    {
+      slug: "nuzm-tech-website",
+      title: "NUZM Tech — Full-Stack Website",
+      status: { en: "In Progress", ur: "زیرِ تکمیل", ru: "Zair-e-Takmeel" },
+      description: {
+        en: "A full-stack website build for NUZM Tech, covering the complete product from front-end to backend infrastructure.",
+        ur: "NUZM Tech کے لیے ایک مکمل فل سٹیک ویب سائٹ، فرنٹ اینڈ سے لے کر بیک اینڈ انفراسٹرکچر تک۔",
+        ru: "NUZM Tech ke liye ek mukammal full-stack website, front-end se le kar backend infrastructure tak.",
+      },
+      tags: ["Full Stack", "Web Development"],
+    },
+    {
+      slug: "ai-humanizer",
+      title: "AI Humanizer",
+      status: { en: "In Progress", ur: "زیرِ تکمیل", ru: "Zair-e-Takmeel" },
+      description: {
+        en: "A tool that rewrites AI-generated text to read more naturally and human, for writers who want their AI-assisted drafts to sound authentically their own.",
+        ur: "ایک ٹول جو AI سے تیار کردہ متن کو زیادہ فطری اور انسانی انداز میں لکھتا ہے، تاکہ AI کی مدد سے لکھا گیا مواد حقیقی طور پر اپنا محسوس ہو۔",
+        ru: "Ek tool jo AI se tayyar karda text ko zyada fitri aur insani andaz mein likhta hai, taake AI ki madad se likha gaya mawad haqeeqi tor par apna mehsoos ho.",
+      },
+      tags: ["AI", "NLP"],
+    },
+    {
+      slug: "mental-health-student-life-review",
+      title: "The Interplay between Mental Health and Student Life in Higher Education: An Examination of Contributing Factors and Resilience Strategies",
+      status: { en: "Writing", ur: "تحریر جاری ہے", ru: "Tehreer Jari Hai" },
+      description: {
+        en: "A review paper examining how mental health and student life interact in higher education — the factors that put students at risk, and the resilience strategies that help them cope.",
+        ur: "ایک review paper جو یہ جانچتا ہے کہ اعلیٰ تعلیم میں ذہنی صحت اور طلبہ کی زندگی کیسے آپس میں جڑی ہوئی ہیں — وہ عوامل جو طلبہ کو خطرے میں ڈالتے ہیں، اور وہ حکمتِ عملیاں جو انہیں مقابلہ کرنے میں مدد دیتی ہیں۔",
+        ru: "Ek review paper jo yeh janchta hai ke aali taleem mein zehni sehat aur talaba ki zindagi kaise aapas mein judi hui hain — wo awamil jo talaba ko khatray mein dalte hain, aur wo hikmat-e-amliyan jo unhein muqabla karne mein madad deti hain.",
+      },
+      tags: ["Review Paper", "Mental Health", "Higher Education"],
+    },
+    {
+      slug: "automata-computer-game-paper",
+      title: "Designing a Computer Game Using the Theory of Automata",
+      status: { en: "Research", ur: "تحقیق جاری ہے", ru: "Tahqeeq Jari Hai" },
+      description: {
+        en: "A research paper exploring how finite automata and formal language theory can be used to design and drive the logic of a computer game.",
+        ur: "ایک تحقیقی مقالہ جو یہ دریافت کرتا ہے کہ finite automata اور formal language theory کو کمپیوٹر گیم کے ڈیزائن اور منطق کے لیے کیسے استعمال کیا جا سکتا ہے۔",
+        ru: "Ek tehqeeqi maqala jo yeh daryaft karta hai ke finite automata aur formal language theory ko computer game ke design aur mantiq ke liye kaise istemal kiya ja sakta hai.",
+      },
+      tags: ["Automata Theory", "Game Development", "Research Paper"],
+    },
+    {
+      slug: "alzheimer-gradcam-paper",
+      title: "Alzheimer's Disease Stage Classification and Detection Using ResNet-18 with Grad-CAM: A Quantitatively Validated Explainability Approach",
+      status: { en: "Research", ur: "تحقیق جاری ہے", ru: "Tahqeeq Jari Hai" },
+      description: {
+        en: "A research paper extending the Alzheimer's detection work with Grad-CAM-based explainability, quantitatively validating that the ResNet-18 model's attention aligns with clinically relevant regions.",
+        ur: "ایک تحقیقی مقالہ جو الزائمر کی تشخیص کے کام کو Grad-CAM پر مبنی explainability کے ساتھ آگے بڑھاتا ہے، اور مقداری طور پر ثابت کرتا ہے کہ ResNet-18 ماڈل کی توجہ طبی طور پر اہم حصوں سے ہم آہنگ ہے۔",
+        ru: "Ek tehqeeqi maqala jo Alzheimer's ki tashkhees ke kaam ko Grad-CAM par mabni explainability ke sath aagay barhata hai, aur miqdari tor par sabit karta hai ke ResNet-18 model ki tawajjo tibbi tor par aham hisson se hum-aahang hai.",
+      },
+      tags: ["ResNet-18", "Grad-CAM", "Explainable AI", "Research Paper"],
+    },
+    {
+      slug: "jarvis-ai-system",
+      title: "Jarvis — Mobile & Laptop Automated AI System",
+      status: { en: "In Progress", ur: "زیرِ تکمیل", ru: "Zair-e-Takmeel" },
+      description: {
+        en: "A voice-driven AI automation system for both mobile and laptop, aimed at handling everyday tasks hands-free — inspired by the classic sci-fi assistant.",
+        ur: "ایک آواز پر مبنی AI automation سسٹم جو موبائل اور لیپ ٹاپ دونوں پر روزمرہ کے کام بغیر ہاتھ لگائے سنبھالتا ہے۔",
+        ru: "Ek awaaz par mabni AI automation system jo mobile aur laptop dono par roz mara ke kaam baghair haath lagaye sambhalta hai.",
+      },
+      tags: ["AI", "Automation"],
+    },
+  ],
+
+  /**
+   * Add certificates here once you send the folder. Shape:
+   * {
+   *   slug: "course-name",
+   *   title: "Course / Certificate Name",
+   *   issuer: "Coursera" | "IBM" | etc,
+   *   status: "completed" | "in-progress",
+   *   date: "2026", // optional
+   *   credentialUrl: "https://...", // optional
+   *   imageUrl: "/certificates/whatever.png", // optional, once images are added
+   * },
+   */
+  certificates: [],
+
+  /**
+   * Add competitions here once you send the folder. Shape:
+   * {
+   *   slug: "competition-name",
+   *   name: "Competition Name",
+   *   organizer: "Organizer Name", // optional
+   *   status: { en: "Applied", ur: "درخواست دی گئی", ru: "Darkhwast Di Gayi" },
+   *   date: "2026", // optional
+   *   description: { en: "...", ur: "...", ru: "..." },
+   *   url: "https://...", // optional
+   * },
+   */
+  competitions: [],
 };

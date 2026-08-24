@@ -29,6 +29,26 @@ export interface UpcomingProject {
   tags: string[]; // technology names — not translated
 }
 
+export interface Certificate {
+  slug: string;
+  title: string; // certificate/course name — not translated
+  issuer: string; // proper noun — not translated
+  status: "completed" | "in-progress";
+  date?: string; // plain string, e.g. "2026" or "Jul 2026" — not translated
+  credentialUrl?: string;
+  imageUrl?: string;
+}
+
+export interface Competition {
+  slug: string;
+  name: string; // proper noun — not translated
+  organizer?: string;
+  status: LocalizedText; // e.g. "Applied", "In Progress", "Result Pending", "Won"
+  date?: string;
+  description: LocalizedText;
+  url?: string;
+}
+
 export interface EducationItem {
   institution: string;
   degree: LocalizedText;
@@ -60,7 +80,6 @@ export interface Profile {
   email: string;
   whatsapp: string; // E.164, no leading "+", ready for wa.me
   githubUsername: string;
-  mediumUsername: string;
   linkedinUrl: string;
   tagline: LocalizedText;
   bio: LocalizedTextList;
@@ -71,6 +90,8 @@ export interface Profile {
   achievements: Achievement[];
   projects: Project[];
   upcomingProjects: UpcomingProject[];
+  certificates: Certificate[];
+  competitions: Competition[];
 }
 
 export interface GithubRepo {
@@ -82,14 +103,6 @@ export interface GithubRepo {
   language: string | null;
   stars: number;
   pushedAt: string;
-}
-
-export interface MediumPost {
-  title: string;
-  link: string;
-  pubDate: string;
-  contentSnippet: string;
-  thumbnail: string | null;
 }
 
 export interface ContactFormState {

@@ -56,6 +56,24 @@ export function getKnowledgeChunks(): KnowledgeChunk[] {
     });
   }
 
+  for (const cert of profile.certificates) {
+    chunks.push({
+      id: `certificate-${cert.slug}`,
+      text: `Certificate — ${cert.title}, issued by ${cert.issuer}${cert.date ? ` (${cert.date})` : ""}. Status: ${
+        cert.status
+      }.`,
+    });
+  }
+
+  for (const comp of profile.competitions) {
+    chunks.push({
+      id: `competition-${comp.slug}`,
+      text: `Competition — ${comp.name}${comp.organizer ? ` (organized by ${comp.organizer})` : ""}. Status: ${
+        comp.status.en
+      }${comp.date ? `, ${comp.date}` : ""}. ${comp.description.en}`,
+    });
+  }
+
   for (const edu of profile.education) {
     chunks.push({
       id: `education-${slugify(edu.institution)}`,
