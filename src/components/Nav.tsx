@@ -13,6 +13,7 @@ export function Nav() {
     { href: "#about", label: t.nav.about },
     { href: "#skills", label: t.nav.skills },
     { href: "#projects", label: t.nav.projects },
+    { href: "#upcoming", label: t.nav.upcoming },
     { href: "#education", label: t.nav.education },
     { href: "#achievements", label: t.nav.achievements },
     { href: "#contact", label: t.nav.contact },

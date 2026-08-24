@@ -280,4 +280,24 @@ export const profile: Profile = {
       featured: false,
     },
   ],
+
+  /**
+   * Projects that are in progress or planned but not shipped yet. Starts
+   * empty on purpose — add entries here as real work begins, following this
+   * shape (status is free text like "In Progress" / "Planned" / "Research"):
+   *
+   * {
+   *   slug: "my-next-thing",
+   *   title: "My Next Thing",
+   *   status: { en: "In Progress", ur: "زیرِ تکمیل", ru: "Zair-e-Takmeel" },
+   *   eta: "Q1 2027", // optional
+   *   description: {
+   *     en: "One or two sentences on what it does and why.",
+   *     ur: "اردو میں ایک یا دو جملے۔",
+   *     ru: "Roman Urdu mein ek ya do jumlay.",
+   *   },
+   *   tags: ["Python", "PyTorch"],
+   * },
+   */
+  upcomingProjects: [],
 };

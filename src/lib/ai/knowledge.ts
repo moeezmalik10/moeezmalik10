@@ -47,6 +47,15 @@ export function getKnowledgeChunks(): KnowledgeChunk[] {
     });
   }
 
+  for (const project of profile.upcomingProjects) {
+    chunks.push({
+      id: `upcoming-${project.slug}`,
+      text: `Upcoming project "${project.title}" — status: ${project.status.en}${
+        project.eta ? `, ETA ${project.eta}` : ""
+      }. ${project.description.en} Technologies: ${project.tags.join(", ")}.`,
+    });
+  }
+
   for (const edu of profile.education) {
     chunks.push({
       id: `education-${slugify(edu.institution)}`,

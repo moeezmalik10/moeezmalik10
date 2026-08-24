@@ -5,6 +5,7 @@ export interface Dictionary {
     about: string;
     skills: string;
     projects: string;
+    upcoming: string;
     education: string;
     achievements: string;
     contact: string;
@@ -42,6 +43,14 @@ export interface Dictionary {
     writingEyebrow: string;
     writingHeading: string;
     writingEmpty: string;
+  };
+  upcomingProjects: {
+    eyebrow: string;
+    heading: string;
+    subtitle: string;
+    etaLabel: string;
+    emptyTitle: string;
+    emptyDescription: string;
   };
   education: {
     eyebrow: string;
@@ -89,6 +98,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       about: "About",
       skills: "Skills",
       projects: "Projects",
+      upcoming: "Upcoming",
       education: "Education",
       achievements: "Achievements",
       contact: "Contact",
@@ -127,16 +137,24 @@ export const dictionaries: Record<Locale, Dictionary> = {
       writingHeading: "Latest from Medium",
       writingEmpty: "No Medium posts yet.",
     },
+    upcomingProjects: {
+      eyebrow: "04 · UPCOMING",
+      heading: "What's next",
+      subtitle: "Work in progress or on deck — updated as it happens.",
+      etaLabel: "ETA",
+      emptyTitle: "Nothing queued up publicly yet",
+      emptyDescription: "New builds land here the moment they're underway. Check back soon, or ask Byte what's in the works.",
+    },
     education: {
-      eyebrow: "04 · EDUCATION",
+      eyebrow: "05 · EDUCATION",
       heading: "Academic path",
     },
     achievements: {
-      eyebrow: "05 · ACHIEVEMENTS",
+      eyebrow: "06 · ACHIEVEMENTS",
       heading: "Milestones so far",
     },
     contact: {
-      eyebrow: "06 · CONTACT",
+      eyebrow: "07 · CONTACT",
       heading: "Let's build something worth shipping.",
       subheading: "Open to internships, collaborations and interesting problems in AI or full-stack engineering.",
       formNote: "OR SEND A MESSAGE DIRECTLY",
@@ -170,6 +188,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       about: "تعارف",
       skills: "مہارتیں",
       projects: "پراجیکٹس",
+      upcoming: "آئندہ",
       education: "تعلیم",
       achievements: "کامیابیاں",
       contact: "رابطہ",
@@ -208,16 +227,24 @@ export const dictionaries: Record<Locale, Dictionary> = {
       writingHeading: "Medium سے تازہ ترین",
       writingEmpty: "ابھی تک کوئی Medium پوسٹ موجود نہیں۔",
     },
+    upcomingProjects: {
+      eyebrow: "۰۴ · آئندہ",
+      heading: "آگے کیا ہے",
+      subtitle: "زیرِ تکمیل یا منصوبہ بند کام — جیسے جیسے شروع ہوگا، یہاں اپڈیٹ ہوگا۔",
+      etaLabel: "متوقع وقت",
+      emptyTitle: "ابھی عوامی طور پر کچھ بھی زیرِ تکمیل نہیں",
+      emptyDescription: "نئے پراجیکٹس شروع ہوتے ہی یہاں شامل کیے جائیں گے۔ کچھ دیر بعد دوبارہ دیکھیں، یا بائٹ سے پوچھیں کہ اس وقت کیا ہو رہا ہے۔",
+    },
     education: {
-      eyebrow: "۰۴ · تعلیم",
+      eyebrow: "۰۵ · تعلیم",
       heading: "تعلیمی سفر",
     },
     achievements: {
-      eyebrow: "۰۵ · کامیابیاں",
+      eyebrow: "۰۶ · کامیابیاں",
       heading: "اب تک کے سنگ میل",
     },
     contact: {
-      eyebrow: "۰۶ · رابطہ",
+      eyebrow: "۰۷ · رابطہ",
       heading: "آئیں کچھ ایسا بنائیں جو شپ کرنے کے قابل ہو۔",
       subheading: "انٹرن شپس، تعاون اور AI یا فل سٹیک انجینئرنگ کے دلچسپ مسائل کے لیے دستیاب ہوں۔",
       formNote: "یا براہِ راست پیغام بھیجیں",
@@ -251,6 +278,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       about: "About",
       skills: "Skills",
       projects: "Projects",
+      upcoming: "Aainda",
       education: "Taleem",
       achievements: "Kamyabiyan",
       contact: "Rabta",
@@ -289,16 +317,24 @@ export const dictionaries: Record<Locale, Dictionary> = {
       writingHeading: "Medium se taza tareen",
       writingEmpty: "Abhi tak koi Medium post maujood nahi.",
     },
+    upcomingProjects: {
+      eyebrow: "04 · UPCOMING",
+      heading: "Aagay kya hai",
+      subtitle: "Zair-e-takmeel ya planned kaam — jaisay jaisay shuru hoga, yahan update hoga.",
+      etaLabel: "ETA",
+      emptyTitle: "Abhi publicly kuch bhi zair-e-takmeel nahi",
+      emptyDescription: "Naye projects shuru hotay hi yahan shamil kiye jayenge. Thori dair baad dobara dekhein, ya Byte se poochein ke is waqt kya ho raha hai.",
+    },
     education: {
-      eyebrow: "04 · EDUCATION",
+      eyebrow: "05 · EDUCATION",
       heading: "Taleemi safar",
     },
     achievements: {
-      eyebrow: "05 · ACHIEVEMENTS",
+      eyebrow: "06 · ACHIEVEMENTS",
       heading: "Ab tak ke sang-e-meel",
     },
     contact: {
-      eyebrow: "06 · CONTACT",
+      eyebrow: "07 · CONTACT",
       heading: "Aayein kuch aisa banayein jo ship karne ke qabil ho.",
       subheading: "Internships, collaborations aur AI ya full-stack engineering ke dilchasp masail ke liye dastyab hoon.",
       formNote: "YA SEEDHA MESSAGE BHEJEIN",

@@ -20,6 +20,15 @@ export interface Project {
   featured: boolean;
 }
 
+export interface UpcomingProject {
+  slug: string;
+  title: string; // proper noun / product name — not translated
+  status: LocalizedText; // e.g. "In Progress", "Planned"
+  eta?: string; // optional plain string, e.g. "Q1 2027" — not translated
+  description: LocalizedText;
+  tags: string[]; // technology names — not translated
+}
+
 export interface EducationItem {
   institution: string;
   degree: LocalizedText;
@@ -61,6 +70,7 @@ export interface Profile {
   education: EducationItem[];
   achievements: Achievement[];
   projects: Project[];
+  upcomingProjects: UpcomingProject[];
 }
 
 export interface GithubRepo {
