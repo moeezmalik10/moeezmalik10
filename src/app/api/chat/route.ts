@@ -9,7 +9,12 @@ export const runtime = "edge";
 // Groq (console.groq.com) is the chat model — genuinely free, no billing
 // required, and fast. OpenAI is only used (optionally) for embeddings if you
 // wire up the Supabase vector-search path later — see retrieval.ts.
-const CHAT_MODEL = "llama-3.3-70b-versatile";
+//
+// Groq's hosted model lineup changes over time as they add/retire models —
+// if this ever 404s with "model does not exist", check the current list at
+// https://console.groq.com/docs/models or `GET /openai/v1/models` with your
+// key, and swap the id below.
+const CHAT_MODEL = "openai/gpt-oss-120b";
 
 export async function POST(req: Request) {
   if (!process.env.GROQ_API_KEY) {
