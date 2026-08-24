@@ -28,7 +28,23 @@ export const metadata: Metadata = {
     template: `%s — ${profile.name}`,
   },
   description: profile.tagline.en,
-  keywords: ["Muhammad Moeez", "Deep Learning", "Full Stack Developer", "React", "Next.js", "Machine Learning", "Portfolio"],
+  // The `keywords` meta tag itself carries ~zero ranking weight with Google
+  // today (confirmed by Google since 2009) — this is here for the handful of
+  // smaller engines that still read it, not as a real ranking lever. The
+  // actual name/stack-matching signal comes from the structured data below
+  // (`alternateName`, `knowsAbout`) and from the content itself.
+  keywords: [
+    "Muhammad Moeez",
+    "Muhammad Moeez Malik",
+    "Moeez Malik",
+    "moeezmalik10",
+    "Deep Learning Developer",
+    "Full Stack Developer",
+    "Machine Learning Engineer",
+    "React Developer",
+    "Next.js Developer",
+    "Gujranwala Pakistan developer",
+  ],
   authors: [{ name: profile.name, url: siteUrl }],
   creator: profile.name,
   openGraph: {
@@ -37,33 +53,56 @@ export const metadata: Metadata = {
     title: `${profile.name} — ${profile.role.en}`,
     description: profile.tagline.en,
     siteName: `${profile.name} Portfolio`,
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: profile.name }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${profile.name} — ${profile.role.en}`,
     description: profile.tagline.en,
-    images: ["/og-image.png"],
   },
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
+  // TODO once you set up Google Search Console (search.google.com/search-console):
+  // add your verification code here, e.g. verification: { google: "abc123..." }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // Structured data is the real lever for "ranks even on a loose/misspelled
+  // match" — `alternateName` explicitly tells Google every name variant to
+  // associate with this page, and `knowsAbout` does the same for stack terms
+  // (so a search like "Moeez Malik ResNet developer" has a legitimate signal
+  // to match against, not just keyword-stuffed meta tags).
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: profile.name,
+    alternateName: ["Moeez", "Moeez Malik", "Muhammad Moeez Malik", "moeezmalik10"],
     url: siteUrl,
+    image: "https://avatars.githubusercontent.com/u/170174525?v=4",
     jobTitle: profile.role.en,
+    description: profile.tagline.en,
     address: { "@type": "PostalAddress", addressLocality: profile.location },
+    email: `mailto:${profile.email}`,
+    alumniOf: profile.education.map((edu) => ({
+      "@type": "EducationalOrganization",
+      name: edu.institution,
+    })),
+    knowsAbout: [
+      ...profile.skills.flatMap((group) => group.stack.map((s) => s.name)),
+      ...profile.projects.flatMap((p) => p.tags),
+    ].filter((v, i, arr) => arr.indexOf(v) === i),
     sameAs: profile.socials.map((s) => s.url),
+  };
+
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: `${profile.name} Portfolio`,
+    url: siteUrl,
+    inLanguage: ["en", "ur"],
+    author: { "@type": "Person", name: profile.name },
   };
 
   return (
@@ -76,6 +115,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <LocaleProvider>
           <SmoothScroll>
