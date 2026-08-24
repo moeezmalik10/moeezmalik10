@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { profile } from "@/data/profile";
+import { useLocale } from "@/lib/i18n/LocaleContext";
 
 // Three.js touches the DOM/WebGL context, so it must never run during SSR.
 const ParticleCanvas = dynamic(() => import("@/components/hero/ParticleCanvas").then((m) => m.ParticleCanvas), {
@@ -21,6 +22,8 @@ const item = {
 };
 
 export function Hero() {
+  const { locale, t } = useLocale();
+
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-32 pb-20 px-6 md:px-10 overflow-hidden">
       <ParticleCanvas />
@@ -37,7 +40,7 @@ export function Hero() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-line bg-white/5 backdrop-blur text-xs font-mono tracking-wide text-cyan mb-8"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
-            AVAILABLE FOR OPPORTUNITIES · {profile.location.split(",")[0]?.toUpperCase()}
+            {t.hero.badge} · {profile.location.split(",")[0]?.toUpperCase()}
           </motion.div>
 
           <h1 className="font-display font-semibold text-[13vw] leading-[0.95] md:text-[5.2rem] md:leading-[0.95] tracking-tight">
@@ -53,7 +56,7 @@ export function Hero() {
           </h1>
 
           <motion.p variants={item} className="mt-8 max-w-xl text-lg text-muted leading-relaxed">
-            {profile.tagline}
+            {profile.tagline[locale]}
           </motion.p>
 
           <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-4">
@@ -61,7 +64,7 @@ export function Hero() {
               href="#projects"
               className="bg-gradient-to-br from-violet to-[#6f4dff] text-white px-7 py-3.5 rounded-full text-sm font-semibold inline-flex items-center gap-2 hover:scale-[1.03] transition-transform"
             >
-              View Projects
+              {t.hero.ctaProjects}
             </a>
             <a
               href={`https://github.com/${profile.githubUsername}`}
@@ -69,7 +72,7 @@ export function Hero() {
               rel="noopener noreferrer"
               className="px-7 py-3.5 rounded-full text-sm font-semibold border border-line bg-white/5 hover:border-violet transition-colors"
             >
-              GitHub
+              {t.hero.ctaGithub}
             </a>
           </motion.div>
         </div>

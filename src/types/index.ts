@@ -1,3 +1,8 @@
+export type Locale = "en" | "ur" | "ru";
+
+export type LocalizedText = Record<Locale, string>;
+export type LocalizedTextList = Record<Locale, string[]>;
+
 export interface SocialLink {
   name: string;
   url: string;
@@ -6,10 +11,10 @@ export interface SocialLink {
 
 export interface Project {
   slug: string;
-  title: string;
-  category: string;
-  description: string;
-  tags: string[];
+  title: string; // proper noun / product name — not translated
+  category: LocalizedText;
+  description: LocalizedText;
+  tags: string[]; // technology names — not translated
   githubUrl: string;
   liveUrl?: string;
   featured: boolean;
@@ -17,20 +22,20 @@ export interface Project {
 
 export interface EducationItem {
   institution: string;
-  degree: string;
+  degree: LocalizedText;
   duration: string;
-  description: string;
+  description: LocalizedText;
 }
 
 export interface Achievement {
-  title: string;
+  title: LocalizedText;
   value: string;
-  description: string;
+  description: LocalizedText;
 }
 
 export interface SkillGroup {
-  title: string;
-  points: string[];
+  title: LocalizedText;
+  points: LocalizedTextList;
   stack: { name: string; colorHex?: string }[];
 }
 
@@ -41,15 +46,15 @@ export interface CompetitiveProfile {
 
 export interface Profile {
   name: string;
-  role: string;
+  role: LocalizedText;
   location: string;
   email: string;
   whatsapp: string; // E.164, no leading "+", ready for wa.me
   githubUsername: string;
   mediumUsername: string;
   linkedinUrl: string;
-  tagline: string;
-  bio: string[];
+  tagline: LocalizedText;
+  bio: LocalizedTextList;
   socials: SocialLink[];
   skills: SkillGroup[];
   competitiveProfiles: CompetitiveProfile[];

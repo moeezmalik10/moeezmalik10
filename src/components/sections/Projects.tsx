@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
+import { useLocale } from "@/lib/i18n/LocaleContext";
 
 export function Projects() {
+  const { locale, t } = useLocale();
+
   return (
     <section id="projects" className="relative py-32 px-6 md:px-10">
       <div className="max-w-7xl mx-auto">
@@ -15,13 +18,10 @@ export function Projects() {
           className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
           <div className="max-w-xl">
-            <p className="font-mono text-xs tracking-wide text-cyan mb-4">03 · PROJECTS</p>
-            <h2 className="font-display text-4xl md:text-5xl font-semibold leading-tight">Selected work</h2>
+            <p className="font-mono text-xs tracking-wide text-cyan mb-4">{t.projects.eyebrow}</p>
+            <h2 className="font-display text-4xl md:text-5xl font-semibold leading-tight">{t.projects.heading}</h2>
           </div>
-          <p className="text-muted max-w-sm">
-            A mix of deep learning experiments and full-stack products. Live activity from GitHub is further down
-            the page.
-          </p>
+          <p className="text-muted max-w-sm">{t.projects.subtitle}</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -36,12 +36,12 @@ export function Projects() {
             >
               <div>
                 <span className="font-mono text-xs px-3 py-1 rounded-full border border-violet/30 text-violet">
-                  {project.category.toUpperCase()}
+                  {project.category[locale].toUpperCase()}
                 </span>
                 <h3 className="font-display text-xl font-semibold mt-5 mb-3 group-hover:text-violet transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-muted text-sm leading-relaxed">{project.description}</p>
+                <p className="text-muted text-sm leading-relaxed">{project.description[locale]}</p>
               </div>
               <div className="mt-7">
                 <div className="flex flex-wrap gap-2 mb-5">
@@ -58,7 +58,7 @@ export function Projects() {
                     rel="noopener noreferrer"
                     className="text-sm font-medium text-white hover:text-violet transition-colors"
                   >
-                    GitHub →
+                    {t.projects.githubLabel} →
                   </a>
                   {project.liveUrl && (
                     <a
@@ -67,7 +67,7 @@ export function Projects() {
                       rel="noopener noreferrer"
                       className="text-sm font-medium text-cyan hover:text-white transition-colors"
                     >
-                      Live Demo →
+                      {t.projects.liveLabel} →
                     </a>
                   )}
                 </div>

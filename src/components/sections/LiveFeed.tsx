@@ -1,31 +1,45 @@
-import { getGithubRepos } from "@/lib/integrations/github";
-import { getMediumPosts } from "@/lib/integrations/medium";
+"use client";
+
+import { useEffect, useState } from "react";
 import { formatDate } from "@/lib/utils";
+import { useLocale } from "@/lib/i18n/LocaleContext";
+import type { GithubRepo, MediumPost } from "@/types";
 
 /**
- * Server Component — calls the integration libs directly (same cached
- * `fetch` used by /api/github and /api/medium) so this section renders with
- * live data on the server, no client-side waterfall. The API routes remain
- * useful for any client that wants the same data independently (e.g. a
- * future mobile app).
+ * Client Component — hits the cached Route Handlers (/api/github,
+ * /api/medium) rather than calling the integration libs directly, so this
+ * section can re-render instantly on a locale switch without a server
+ * round-trip. The routes themselves still own the actual caching
+ * (`revalidate = 3600`) — see src/app/api/github/route.ts and medium/route.ts.
  */
-export async function LiveFeed() {
-  const [repos, posts] = await Promise.allSettled([getGithubRepos(), getMediumPosts()]);
+export function LiveFeed() {
+  const { t } = useLocale();
+  const [repos, setRepos] = useState<GithubRepo[] | null>(null);
+  const [posts, setPosts] = useState<MediumPost[] | null>(null);
 
-  const githubRepos = repos.status === "fulfilled" ? repos.value.slice(0, 4) : [];
-  const mediumPosts = posts.status === "fulfilled" ? posts.value.slice(0, 3) : [];
+  useEffect(() => {
+    fetch("/api/github")
+      .then((res) => res.json())
+      .then((data) => setRepos(data.repos ?? []))
+      .catch(() => setRepos([]));
+
+    fetch("/api/medium")
+      .then((res) => res.json())
+      .then((data) => setPosts(data.posts ?? []))
+      .catch(() => setPosts([]));
+  }, []);
+
+  const githubRepos = (repos ?? []).slice(0, 4);
+  const mediumPosts = (posts ?? []).slice(0, 3);
 
   return (
     <section className="relative py-24 px-6 md:px-10 bg-surface/40 border-y border-line">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
         <div>
-          <p className="font-mono text-xs tracking-wide text-cyan mb-3">LIVE · GITHUB</p>
-          <h3 className="font-display text-2xl font-semibold mb-6">Latest activity</h3>
-          {githubRepos.length === 0 ? (
-            <p className="text-muted text-sm">
-              Couldn&apos;t reach the GitHub API right now — set <code>GITHUB_USERNAME</code> in your env and try
-              again.
-            </p>
+          <p className="font-mono text-xs tracking-wide text-cyan mb-3">{t.liveFeed.githubEyebrow}</p>
+          <h3 className="font-display text-2xl font-semibold mb-6">{t.liveFeed.githubHeading}</h3>
+          {repos !== null && githubRepos.length === 0 ? (
+            <p className="text-muted text-sm">{t.liveFeed.githubEmpty}</p>
           ) : (
             <ul className="space-y-4">
               {githubRepos.map((repo) => (
@@ -49,12 +63,10 @@ export async function LiveFeed() {
         </div>
 
         <div>
-          <p className="font-mono text-xs tracking-wide text-cyan mb-3">LIVE · WRITING</p>
-          <h3 className="font-display text-2xl font-semibold mb-6">Latest from Medium</h3>
-          {mediumPosts.length === 0 ? (
-            <p className="text-muted text-sm">
-              No Medium posts yet — set <code>MEDIUM_USERNAME</code> in your env once you start publishing.
-            </p>
+          <p className="font-mono text-xs tracking-wide text-cyan mb-3">{t.liveFeed.writingEyebrow}</p>
+          <h3 className="font-display text-2xl font-semibold mb-6">{t.liveFeed.writingHeading}</h3>
+          {posts !== null && mediumPosts.length === 0 ? (
+            <p className="text-muted text-sm">{t.liveFeed.writingEmpty}</p>
           ) : (
             <ul className="space-y-4">
               {mediumPosts.map((post) => (

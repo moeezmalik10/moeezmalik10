@@ -7,8 +7,15 @@ export interface KnowledgeChunk {
 
 /**
  * Serializes `src/data/profile.ts` into short, self-contained text chunks —
- * the ONLY source of truth the chatbot is allowed to answer from. Each chunk
- * is small on purpose: better retrieval precision than one giant blob.
+ * the ONLY source of truth the chatbot is allowed to answer from.
+ *
+ * The retrieval corpus is built from the English (`en`) strings only, even
+ * though the site itself is trilingual (English / Urdu / Roman Urdu). This
+ * is deliberate: embeddings and keyword search both work fine against an
+ * English corpus for Urdu/Roman Urdu queries, and the model is instructed
+ * (see systemPrompt.ts) to translate its *reply* into whatever language the
+ * visitor is writing in — so we don't need 3x the embeddings to seed and
+ * keep in sync.
  *
  * Used by:
  *  - scripts/seed-embeddings.ts (embeds these into Supabase)
@@ -19,13 +26,13 @@ export function getKnowledgeChunks(): KnowledgeChunk[] {
 
   chunks.push({
     id: "about",
-    text: `${profile.name} is a ${profile.role} based in ${profile.location}. ${profile.bio.join(" ")}`,
+    text: `${profile.name} is a ${profile.role.en} based in ${profile.location}. ${profile.bio.en.join(" ")}`,
   });
 
   for (const group of profile.skills) {
     chunks.push({
-      id: `skills-${slugify(group.title)}`,
-      text: `${profile.name}'s skills in ${group.title}: ${group.points.join("; ")}. Tools: ${group.stack
+      id: `skills-${slugify(group.title.en)}`,
+      text: `${profile.name}'s skills in ${group.title.en}: ${group.points.en.join("; ")}. Tools: ${group.stack
         .map((s) => s.name)
         .join(", ")}.`,
     });
@@ -34,7 +41,7 @@ export function getKnowledgeChunks(): KnowledgeChunk[] {
   for (const project of profile.projects) {
     chunks.push({
       id: `project-${project.slug}`,
-      text: `Project "${project.title}" (${project.category}): ${project.description} Built with ${project.tags.join(
+      text: `Project "${project.title}" (${project.category.en}): ${project.description.en} Built with ${project.tags.join(
         ", "
       )}. GitHub: ${project.githubUrl}.${project.liveUrl ? ` Live demo: ${project.liveUrl}.` : ""}`,
     });
@@ -43,14 +50,14 @@ export function getKnowledgeChunks(): KnowledgeChunk[] {
   for (const edu of profile.education) {
     chunks.push({
       id: `education-${slugify(edu.institution)}`,
-      text: `${profile.name} studied ${edu.degree} at ${edu.institution} (${edu.duration}). ${edu.description}`,
+      text: `${profile.name} studied ${edu.degree.en} at ${edu.institution} (${edu.duration}). ${edu.description.en}`,
     });
   }
 
   for (const achievement of profile.achievements) {
     chunks.push({
-      id: `achievement-${slugify(achievement.title)}`,
-      text: `Achievement — ${achievement.title} (${achievement.value}): ${achievement.description}`,
+      id: `achievement-${slugify(achievement.title.en)}`,
+      text: `Achievement — ${achievement.title.en} (${achievement.value}): ${achievement.description.en}`,
     });
   }
 

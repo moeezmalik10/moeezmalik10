@@ -50,7 +50,7 @@ export async function getMediumPosts(): Promise<MediumPost[]> {
       link: item.link,
       pubDate: item.pubDate,
       contentSnippet: textSnippet,
-      thumbnail: thumbnailMatch ? thumbnailMatch[1] : null,
+      thumbnail: thumbnailMatch?.[1] ?? null,
     };
   });
 }

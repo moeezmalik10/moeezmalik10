@@ -24,7 +24,7 @@ export async function sendContactEmail({ name, email, message }: ContactEmailInp
   return getClient().emails.send({
     from: `Portfolio Contact Form <${from}>`,
     to,
-    replyTo: email,
+    reply_to: email,
     subject: `New portfolio message from ${name}`,
     html: `
       <div style="font-family: sans-serif; line-height: 1.6;">

@@ -1,19 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-const LINKS = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
-  { href: "#education", label: "Education" },
-  { href: "#achievements", label: "Achievements" },
-  { href: "#contact", label: "Contact" },
-];
+import { useLocale } from "@/lib/i18n/LocaleContext";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export function Nav() {
+  const { t } = useLocale();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const LINKS = [
+    { href: "#about", label: t.nav.about },
+    { href: "#skills", label: t.nav.skills },
+    { href: "#projects", label: t.nav.projects },
+    { href: "#education", label: t.nav.education },
+    { href: "#achievements", label: t.nav.achievements },
+    { href: "#contact", label: t.nav.contact },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -38,20 +41,26 @@ export function Nav() {
             </a>
           ))}
         </nav>
-        <a
-          href="#contact"
-          className="hidden md:inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-full bg-gradient-to-br from-violet to-[#6f4dff] text-white"
-        >
-          Let&apos;s talk
-        </a>
-        <button
-          onClick={() => setMobileOpen((v) => !v)}
-          className="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-1.5"
-          aria-label="Menu"
-        >
-          <span className="block w-6 h-px bg-white" />
-          <span className="block w-6 h-px bg-white" />
-        </button>
+        <div className="hidden md:flex items-center gap-4">
+          <LanguageSwitcher />
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-full bg-gradient-to-br from-violet to-[#6f4dff] text-white"
+          >
+            {t.nav.talk}
+          </a>
+        </div>
+        <div className="flex md:hidden items-center gap-3">
+          <LanguageSwitcher />
+          <button
+            onClick={() => setMobileOpen((v) => !v)}
+            className="w-9 h-9 flex flex-col justify-center items-center gap-1.5"
+            aria-label="Menu"
+          >
+            <span className="block w-6 h-px bg-white" />
+            <span className="block w-6 h-px bg-white" />
+          </button>
+        </div>
       </div>
       {mobileOpen && (
         <div className="md:hidden flex flex-col gap-1 px-6 pb-6 bg-surface/95 backdrop-blur-xl mx-4 rounded-2xl border border-line">

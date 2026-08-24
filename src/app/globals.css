@@ -10,6 +10,19 @@ body {
   background-color: #07070c;
 }
 
+/* Urdu script gets Nastaliq rendering; English and Roman Urdu keep the Latin font stack. */
+html[data-locale="ur"] body {
+  font-family: var(--font-noto-nastaliq), "Inter", sans-serif;
+}
+html[data-locale="ur"] .font-display {
+  font-family: var(--font-noto-nastaliq), sans-serif;
+}
+
+/* RTL: mirror gaps/alignment that Tailwind's ltr/rtl variants don't reach automatically */
+html[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
+
 ::selection {
   background: #8b6bff;
   color: #07070c;

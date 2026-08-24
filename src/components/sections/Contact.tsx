@@ -4,11 +4,12 @@ import { useFormState, useFormStatus } from "react-dom";
 import { motion } from "framer-motion";
 import { submitContactForm } from "@/app/actions/contact";
 import { profile } from "@/data/profile";
+import { useLocale } from "@/lib/i18n/LocaleContext";
 import type { ContactFormState } from "@/types";
 
 const initialState: ContactFormState = { status: "idle", message: "" };
 
-function SubmitButton() {
+function SubmitButton({ label, pendingLabel }: { label: string; pendingLabel: string }) {
   const { pending } = useFormStatus();
   return (
     <button
@@ -16,12 +17,13 @@ function SubmitButton() {
       disabled={pending}
       className="w-full bg-gradient-to-br from-violet to-[#6f4dff] text-white px-6 py-3.5 rounded-full text-sm font-semibold inline-flex items-center justify-center gap-2 hover:scale-[1.01] transition-transform disabled:opacity-60 disabled:cursor-not-allowed"
     >
-      {pending ? "Sending…" : "Send message"}
+      {pending ? pendingLabel : label}
     </button>
   );
 }
 
 export function Contact() {
+  const { t, locale } = useLocale();
   const [state, formAction] = useFormState(submitContactForm, initialState);
 
   return (
@@ -33,21 +35,17 @@ export function Contact() {
           viewport={{ once: true }}
           className="font-mono text-xs tracking-wide text-cyan mb-5"
         >
-          06 · CONTACT
+          {t.contact.eyebrow}
         </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-display text-5xl md:text-7xl font-semibold leading-[1.05] mb-8"
+          className="font-display text-4xl md:text-6xl font-semibold leading-[1.15] mb-8"
         >
-          Let&apos;s build something
-          <br />
-          <span className="bg-gradient-to-r from-violet to-cyan bg-clip-text text-transparent">worth shipping.</span>
+          <span className="bg-gradient-to-r from-violet to-cyan bg-clip-text text-transparent">{t.contact.heading}</span>
         </motion.h2>
-        <p className="text-muted text-lg max-w-xl mx-auto mb-12">
-          Open to internships, collaborations and interesting problems in AI or full-stack engineering.
-        </p>
+        <p className="text-muted text-lg max-w-xl mx-auto mb-12">{t.contact.subheading}</p>
 
         <div className="flex flex-wrap items-center justify-center gap-3 mb-14">
           <a
@@ -62,62 +60,61 @@ export function Contact() {
             rel="noopener noreferrer"
             className="px-8 py-4 rounded-full text-base font-semibold border border-line bg-white/5 hover:border-[#25D366] transition-colors"
           >
-            Chat on WhatsApp
+            {t.contact.whatsappButton}
           </a>
         </div>
 
         <form action={formAction} className="rounded-3xl border border-line bg-white/5 p-8 md:p-10 text-left max-w-2xl mx-auto">
-          <p className="font-mono text-xs text-muted mb-6 text-center">OR SEND A MESSAGE DIRECTLY</p>
+          <input type="hidden" name="locale" value={locale} />
+          <p className="font-mono text-xs text-muted mb-6 text-center">{t.contact.formNote}</p>
           <div className="grid sm:grid-cols-2 gap-5 mb-5">
             <div>
               <label htmlFor="name" className="text-xs font-mono text-muted block mb-2">
-                YOUR NAME
+                {t.contact.nameLabel}
               </label>
               <input
                 id="name"
                 name="name"
                 type="text"
                 required
-                placeholder="Jane Doe"
+                placeholder={t.contact.namePlaceholder}
                 className="w-full bg-white/5 border border-line focus:border-violet rounded-xl px-4 py-3 text-sm outline-none transition-colors"
               />
             </div>
             <div>
               <label htmlFor="email" className="text-xs font-mono text-muted block mb-2">
-                YOUR EMAIL
+                {t.contact.emailLabel}
               </label>
               <input
                 id="email"
                 name="email"
                 type="email"
                 required
-                placeholder="jane@example.com"
+                placeholder={t.contact.emailPlaceholder}
                 className="w-full bg-white/5 border border-line focus:border-violet rounded-xl px-4 py-3 text-sm outline-none transition-colors"
               />
             </div>
           </div>
           <div className="mb-6">
             <label htmlFor="message" className="text-xs font-mono text-muted block mb-2">
-              MESSAGE
+              {t.contact.messageLabel}
             </label>
             <textarea
               id="message"
               name="message"
               required
               rows={4}
-              placeholder="What would you like to build together?"
+              placeholder={t.contact.messagePlaceholder}
               className="w-full bg-white/5 border border-line focus:border-violet rounded-xl px-4 py-3 text-sm outline-none transition-colors resize-none"
             />
           </div>
-          <SubmitButton />
+          <SubmitButton label={t.contact.sendButton} pendingLabel={t.contact.sending} />
           {state.status !== "idle" && (
             <p className={`text-sm text-center mt-4 ${state.status === "success" ? "text-cyan" : "text-red-400"}`}>
               {state.message}
             </p>
           )}
-          <p className="text-xs text-muted text-center mt-4">
-            Sent via Resend from a Server Action — no client-side API key exposure.
-          </p>
+          <p className="text-xs text-muted text-center mt-4">{t.contact.resendNote}</p>
         </form>
 
         <div className="flex items-center justify-center gap-4 mt-14">
