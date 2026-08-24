@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #07070c;
+}
+
+::selection {
+  background: #8b6bff;
+  color: #07070c;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #07070c;
+}
+::-webkit-scrollbar-thumb {
+  background: #22222f;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8b6bff;
+}
+
+@layer components {
+  .chat-bubble {
+    max-width: 85%;
+    padding: 0.65rem 0.9rem;
+    border-radius: 1rem;
+    line-height: 1.45;
+    @apply text-sm;
+  }
+  .chat-bubble.bot {
+    @apply bg-white/5 border border-line rounded-bl-md;
+  }
+  .chat-bubble.user {
+    @apply bg-gradient-to-br from-violet to-[#6f4dff] text-white rounded-br-md;
+  }
+
+  .typing-dot {
+    @apply w-1.5 h-1.5 rounded-full bg-muted inline-block animate-bounce;
+  }
+}
