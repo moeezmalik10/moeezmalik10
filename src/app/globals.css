@@ -14,8 +14,20 @@ body {
 html[data-locale="ur"] body {
   font-family: var(--font-noto-nastaliq), "Inter", sans-serif;
 }
+
+/*
+ * Nastaliq's letterforms cascade diagonally within their own line and need
+ * roughly double the line-height a Latin face needs at the same font-size —
+ * otherwise ascenders/descenders from adjacent lines collide (confirmed
+ * visually: headings using leading-tight/leading-[0.95] overlapped into an
+ * unreadable jumble under Nastaliq). This overrides every Tailwind
+ * leading-* utility on headings, which is why it needs !important — both
+ * rules are single-class selectors, so specificity alone can't guarantee
+ * this wins.
+ */
 html[data-locale="ur"] .font-display {
   font-family: var(--font-noto-nastaliq), sans-serif;
+  line-height: 2.1 !important;
 }
 
 /* RTL: mirror gaps/alignment that Tailwind's ltr/rtl variants don't reach automatically */
