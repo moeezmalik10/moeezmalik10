@@ -23,6 +23,7 @@
 
     "ai": "^3.4.33",
     "@ai-sdk/openai": "^0.0.72",
+    "@ai-sdk/groq": "^0.0.3",
     "openai": "^4.53.2",
 
     "@supabase/supabase-js": "^2.44.4",
