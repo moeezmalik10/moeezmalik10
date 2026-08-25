@@ -3,14 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useChat } from "ai/react";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/lib/i18n/LocaleContext";
 
 /**
- * Floating chat widget — the "virtual clone" UI. Talks to /api/chat, which
- * streams tokens back via the Vercel AI SDK. The current UI locale rides
- * along as a hint (see systemPrompt.ts) — the model still mirrors whatever
- * language the visitor actually types in, message by message.
+ * Floating chat widget. The current UI locale rides along as a hint (see
+ * systemPrompt.ts) — the model still mirrors whatever language the visitor
+ * actually types in, message by message.
  */
 export function ChatWidget() {
   const { locale, t } = useLocale();
@@ -38,8 +38,8 @@ export function ChatWidget() {
             dir="ltr"
           >
             <header className="flex items-center gap-3 px-5 py-4 border-b border-line bg-white/5 shrink-0">
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet to-cyan flex items-center justify-center text-sm font-bold text-bg">
-                B
+              <div className="relative w-9 h-9 rounded-full overflow-hidden shrink-0 ring-2 ring-violet/40">
+                <Image src="/avatar.png" alt={t.chatbot.title} fill sizes="36px" className="object-cover" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-semibold text-white">{t.chatbot.title}</p>
@@ -116,13 +116,17 @@ export function ChatWidget() {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label={t.chatbot.title}
-        className="relative w-16 h-16 rounded-full border border-line bg-surface/80 backdrop-blur-xl flex items-center justify-center shadow-2xl shrink-0 hover:scale-105 transition-transform"
+        className="relative w-16 h-16 rounded-full border-2 border-line bg-surface/80 backdrop-blur-xl overflow-hidden shadow-2xl shrink-0 hover:scale-105 transition-transform"
       >
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet to-cyan flex items-center justify-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-bg" />
-          <span className="w-1.5 h-1.5 rounded-full bg-bg" />
-        </div>
-        <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-cyan ring-2 ring-bg animate-pulse" />
+        <Image src="/avatar.png" alt={t.chatbot.title} fill sizes="64px" className="object-cover" />
+        <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-gradient-to-br from-violet to-cyan ring-2 ring-bg flex items-center justify-center">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"
+              fill="#07070c"
+            />
+          </svg>
+        </span>
       </button>
     </div>
   );

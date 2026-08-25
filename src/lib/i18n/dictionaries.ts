@@ -89,7 +89,6 @@ export interface Dictionary {
     messagePlaceholder: string;
     sendButton: string;
     sending: string;
-    resendNote: string;
     whatsappButton: string;
   };
   footer: {
@@ -198,7 +197,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
       messagePlaceholder: "What would you like to build together?",
       sendButton: "Send message",
       sending: "Sending…",
-      resendNote: "Sent via Resend from a Server Action — no client-side API key exposure.",
       whatsappButton: "Chat on WhatsApp",
     },
     footer: {
@@ -207,7 +205,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     chatbot: {
       title: "Byte",
-      subtitle: "AI assistant · RAG over Moeez's profile",
+      subtitle: "Usually replies instantly",
       welcome: "Hi, I'm Byte 👋 Ask me anything about Moeez — skills, projects, education, achievements, or suggest a project idea and I'll tell you how his stack fits.",
       placeholder: "Ask about Moeez...",
       closeLabel: "Close chat",
@@ -304,7 +302,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
       messagePlaceholder: "آپ مل کر کیا بنانا چاہیں گے؟",
       sendButton: "پیغام بھیجیں",
       sending: "بھیجا جا رہا ہے…",
-      resendNote: "Server Action کے ذریعے Resend سے بھیجا گیا — کوئی کلائنٹ سائیڈ API key ظاہر نہیں ہوتی۔",
       whatsappButton: "واٹس ایپ پر بات کریں",
     },
     footer: {
@@ -313,7 +310,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     chatbot: {
       title: "بائٹ",
-      subtitle: "AI اسسٹنٹ · معیض کی پروفائل پر مبنی",
+      subtitle: "عام طور پر فوری جواب دیتا ہوں",
       welcome: "السلام علیکم، میں بائٹ ہوں 👋 معیض کے بارے میں کچھ بھی پوچھیں — مہارتیں، پراجیکٹس، تعلیم، کامیابیاں، یا کوئی پراجیکٹ آئیڈیا بتائیں اور میں بتاؤں گا کہ اُن کی مہارتیں اس پر کیسے فٹ بیٹھتی ہیں۔",
       placeholder: "معیض کے بارے میں پوچھیں...",
       closeLabel: "چیٹ بند کریں",
@@ -410,7 +407,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
       messagePlaceholder: "Aap mil kar kya banana chahenge?",
       sendButton: "Message bhejein",
       sending: "Bheja ja raha hai…",
-      resendNote: "Server Action ke zariye Resend se bheja gaya — koi client-side API key zahir nahi hoti.",
       whatsappButton: "WhatsApp par baat karein",
     },
     footer: {
@@ -419,7 +415,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     chatbot: {
       title: "Byte",
-      subtitle: "AI assistant · Moeez ki profile par mabni",
+      subtitle: "Aam tor par foran jawab deta hoon",
       welcome: "Salam, main Byte hoon 👋 Moeez ke baray mein kuch bhi poochein — skills, projects, taleem, kamyabiyan, ya koi project idea batayein aur main bataunga ke unki skills is par kaisay fit baithti hain.",
       placeholder: "Moeez ke baray mein poochein...",
       closeLabel: "Chat band karein",

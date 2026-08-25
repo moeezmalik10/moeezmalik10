@@ -78,15 +78,16 @@ export function Hero() {
         </div>
 
         <motion.div variants={item} className="justify-self-center">
-          <div className="relative w-56 h-56 md:w-72 md:h-72">
-            <div className="absolute inset-0 rounded-[2.5rem] rotate-6 bg-gradient-to-br from-violet/40 to-cyan/30 blur-sm" />
-            <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden border border-line bg-white/5">
+          <div className="relative w-64 h-64 md:w-80 md:h-80">
+            <div className="absolute inset-0 rounded-[2.5rem] rotate-6 bg-gradient-to-br from-violet/40 to-cyan/30 blur-2xl" />
+            <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden">
               <Image
-                src="https://avatars.githubusercontent.com/u/170174525?v=4"
+                src="/hero-photo.png"
                 alt={profile.name}
                 fill
-                sizes="288px"
+                sizes="320px"
                 className="object-cover"
+                style={{ objectPosition: "50% 18%" }}
                 priority
               />
             </div>

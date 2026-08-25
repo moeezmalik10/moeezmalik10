@@ -114,7 +114,6 @@ export function Contact() {
               {state.message}
             </p>
           )}
-          <p className="text-xs text-muted text-center mt-4">{t.contact.resendNote}</p>
         </form>
 
         <div className="flex items-center justify-center gap-4 mt-14">

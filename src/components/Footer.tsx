@@ -12,7 +12,6 @@ export function Footer() {
         <p>
           © {new Date().getFullYear()} {profile.name}. {t.footer.rights}
         </p>
-        <p className="font-mono text-xs">NEXT.JS · REACT THREE FIBER · FRAMER MOTION</p>
         <a href="#home" className="hover:text-white transition-colors">
           {t.footer.backToTop}
         </a>

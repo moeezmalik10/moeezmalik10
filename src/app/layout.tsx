@@ -5,6 +5,7 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ChatWidget } from "@/components/chatbot/ChatWidget";
+import { Mascot } from "@/components/Mascot";
 import { LocaleProvider } from "@/lib/i18n/LocaleContext";
 import "./globals.css";
 
@@ -80,7 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     name: profile.name,
     alternateName: ["Moeez", "Moeez Malik", "Muhammad Moeez Malik", "moeezmalik10"],
     url: siteUrl,
-    image: "https://avatars.githubusercontent.com/u/170174525?v=4",
+    image: `${siteUrl}/avatar.png`,
     jobTitle: profile.role.en,
     description: profile.tagline.en,
     address: { "@type": "PostalAddress", addressLocality: profile.location },
@@ -125,6 +126,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Nav />
             {children}
             <Footer />
+            <Mascot />
             <ChatWidget />
           </SmoothScroll>
         </LocaleProvider>

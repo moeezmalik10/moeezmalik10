@@ -73,3 +73,14 @@ html[dir="rtl"] .rtl-flip {
     @apply w-1.5 h-1.5 rounded-full bg-muted inline-block animate-bounce;
   }
 }
+
+.mascot-eye {
+  transform-origin: center;
+  transition: transform 0.09s ease;
+}
+.mascot-eye.mascot-blink {
+  transform: scaleY(0.12);
+}
+.mascot-pupil {
+  transition: transform 0.08s linear;
+}
