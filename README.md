@@ -79,10 +79,10 @@ A restaurant management system handling orders, menus, and day-to-day operations
 ## GitHub Activity
 
 <div align="center">
-
+<!--
 <img src="https://github-readme-stats.vercel.app/api?username=moeezmalik10&amp;show_icons=true&amp;theme=tokyonight&amp;hide_border=true&amp;count_private=true&amp;rank_icon=github&amp;cache_seconds=1800" height="165"/>
 <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=moeezmalik10&amp;layout=compact&amp;theme=tokyonight&amp;hide_border=true&amp;cache_seconds=1800" height="165"/>
-
+-->
 </div>
 
 <br/>
