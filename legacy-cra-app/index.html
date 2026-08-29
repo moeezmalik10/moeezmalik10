@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Muhammad Moeez — Deep Learning & Full-Stack Developer</title>
+<meta name="description" content="Portfolio of Muhammad Moeez — Deep Learning, AI and Full-Stack Developer from Gujranwala, Pakistan." />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['"Space Grotesk"', "sans-serif"],
+          body: ['"Inter"', "sans-serif"],
+          mono: ['"JetBrains Mono"', "monospace"],
+        },
+        colors: {
+          bg: "#07070c",
+          surface: "#0f0f17",
+          surface2: "#14141f",
+          line: "#22222f",
+          violet: "#8b6bff",
+          cyan: "#3fe0d0",
+          muted: "#8b8b9c",
+        },
+      },
+    },
+  };
+</script>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: #07070c;
+    color: #f2f2f5;
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden;
+  }
+  ::selection { background: #8b6bff; color: #07070c; }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #07070c; }
+  ::-webkit-scrollbar-thumb { background: #22222f; border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: #8b6bff; }
+
+  .noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .gradient-text {
+    background: linear-gradient(120deg, #8b6bff 0%, #3fe0d0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(14px);
+  }
+
+  .card-glow {
+    position: relative;
+    overflow: hidden;
+  }
+  .card-glow::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: radial-gradient(400px circle at var(--x, 50%) var(--y, 50%), rgba(139, 107, 255, 0.18), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .card-glow:hover::before { opacity: 1; }
+
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 1px;
+    background: linear-gradient(90deg, #8b6bff, #3fe0d0);
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+
+  .blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(90px);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .tag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 28s linear infinite;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .btn-primary {
+    background: linear-gradient(120deg, #8b6bff, #6f4dff);
+    box-shadow: 0 0 0 1px rgba(139,107,255,0.4), 0 10px 30px -10px rgba(139,107,255,0.6);
+  }
+
+  .section-fade {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  .split-char {
+    display: inline-block;
+    will-change: transform;
+  }
+
+  .timeline-line {
+    background: linear-gradient(180deg, #8b6bff, #3fe0d0, transparent);
+  }
+
+  /* ---- Chat widget ---- */
+  #chat-messages::-webkit-scrollbar { width: 6px; }
+
+  .chat-msg {
+    max-width: 85%;
+    padding: 0.65rem 0.9rem;
+    border-radius: 1rem;
+    line-height: 1.45;
+  }
+  .chat-msg.bot {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom-left-radius: 0.25rem;
+    align-self: flex-start;
+  }
+  .chat-msg.user {
+    background: linear-gradient(120deg, #8b6bff, #6f4dff);
+    color: #fff;
+    border-bottom-right-radius: 0.25rem;
+    align-self: flex-end;
+    margin-left: auto;
+  }
+  .chat-msg-row {
+    display: flex;
+  }
+  .chat-msg-row.user { justify-content: flex-end; }
+
+  .typing-dots { display: inline-flex; gap: 4px; align-items: center; padding: 0.2rem 0; }
+  .typing-dots span {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #8b8b9c;
+    animation: typing-bounce 1.2s infinite ease-in-out;
+  }
+  .typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+  .typing-dots span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes typing-bounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+    30% { transform: translateY(-4px); opacity: 1; }
+  }
+
+  .pet-pupil { transition: transform 0.08s linear; }
+
+  #copy-email-btn.copied { border-color: #3fe0d0; color: #3fe0d0; }
+</style>
+</head>
+
+<body class="bg-bg text-white antialiased">
+<div class="noise"></div>
+
+<!-- ============ AI ASSISTANT PET WIDGET ============ -->
+<div id="ai-pet-wrap" class="fixed bottom-5 right-5 md:bottom-8 md:right-8 z-[70] flex flex-col items-end gap-3">
+
+  <div id="pet-bubble" class="glass rounded-2xl rounded-br-sm px-4 py-3 text-sm max-w-[210px] opacity-0 pointer-events-none" style="transform: translateY(8px);">
+    <span id="pet-bubble-text"></span>
+  </div>
+
+  <div id="chat-panel" class="hidden flex-col w-[90vw] max-w-[350px] h-[70vh] max-h-[460px] glass rounded-3xl overflow-hidden shadow-2xl">
+    <div class="flex items-center gap-3 px-5 py-4 border-b border-line bg-white/5 shrink-0">
+      <div class="w-9 h-9 rounded-full bg-gradient-to-br from-violet to-cyan flex items-center justify-center text-sm font-bold text-bg">B</div>
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-semibold">Byte</p>
+        <p class="text-xs text-muted flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-cyan"></span>Moeez's AI Assistant</p>
+      </div>
+      <button id="chat-close" type="button" class="text-muted hover:text-white text-lg leading-none px-1" aria-label="Close chat">✕</button>
+    </div>
+    <div id="chat-messages" class="flex-1 overflow-y-auto px-4 py-4 space-y-3 text-sm"></div>
+    <form id="chat-form" class="flex items-center gap-2 p-3 border-t border-line shrink-0">
+      <input id="chat-input" type="text" autocomplete="off" placeholder="Ask about Moeez..."
+        class="flex-1 min-w-0 bg-white/5 border border-line focus:border-violet rounded-full px-4 py-2.5 text-sm outline-none transition-colors" />
+      <button type="submit" class="w-10 h-10 rounded-full btn-primary flex items-center justify-center shrink-0" aria-label="Send">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </form>
+  </div>
+
+  <button id="pet-btn" type="button" aria-label="Chat with Byte, Moeez's AI assistant" class="relative w-16 h-16 rounded-full glass flex items-center justify-center shadow-2xl shrink-0">
+    <div id="pet-face" class="relative w-9 h-9 rounded-full bg-gradient-to-br from-violet to-cyan flex items-center justify-center gap-1.5">
+      <span class="pet-eye w-3 h-3 rounded-full bg-white flex items-center justify-center overflow-hidden">
+        <span class="pet-pupil w-1.5 h-1.5 rounded-full bg-bg block"></span>
+      </span>
+      <span class="pet-eye w-3 h-3 rounded-full bg-white flex items-center justify-center overflow-hidden">
+        <span class="pet-pupil w-1.5 h-1.5 rounded-full bg-bg block"></span>
+      </span>
+    </div>
+    <span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-cyan ring-2 ring-bg animate-pulse"></span>
+  </button>
+</div>
+
+<!-- ============ CUSTOM CURSOR (subtle glow that follows pointer, desktop only) ============ -->
+<div id="cursor-glow" class="hidden md:block fixed w-[420px] h-[420px] rounded-full pointer-events-none z-0"
+     style="background: radial-gradient(circle, rgba(139,107,255,0.10), transparent 70%); transform: translate(-50%,-50%);"></div>
+
+<!-- ============ NAV ============ -->
+<header id="site-nav" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between py-5">
+    <a href="#home" class="font-display font-semibold text-lg tracking-tight">
+      Moeez<span class="text-violet">.</span>dev
+    </a>
+    <nav class="hidden md:flex items-center gap-9 text-sm text-muted font-medium">
+      <a href="#about" class="nav-link hover:text-white transition-colors">About</a>
+      <a href="#skills" class="nav-link hover:text-white transition-colors">Skills</a>
+      <a href="#projects" class="nav-link hover:text-white transition-colors">Projects</a>
+      <a href="#education" class="nav-link hover:text-white transition-colors">Education</a>
+      <a href="#achievements" class="nav-link hover:text-white transition-colors">Achievements</a>
+      <a href="#contact" class="nav-link hover:text-white transition-colors">Contact</a>
+    </nav>
+    <a href="#contact" class="hidden md:inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-full btn-primary text-white">
+      Let's talk
+    </a>
+    <button id="menu-btn" class="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-1.5" aria-label="Menu">
+      <span class="block w-6 h-px bg-white"></span>
+      <span class="block w-6 h-px bg-white"></span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="md:hidden hidden flex-col gap-1 px-6 pb-6 glass mx-4 rounded-2xl">
+    <a href="#about" class="py-3 text-muted border-b border-line">About</a>
+    <a href="#skills" class="py-3 text-muted border-b border-line">Skills</a>
+    <a href="#projects" class="py-3 text-muted border-b border-line">Projects</a>
+    <a href="#education" class="py-3 text-muted border-b border-line">Education</a>
+    <a href="#achievements" class="py-3 text-muted border-b border-line">Achievements</a>
+    <a href="#contact" class="py-3 text-muted">Contact</a>
+  </div>
+</header>
+
+<!-- ============ SCROLL PROGRESS BAR ============ -->
+<div id="scroll-progress" class="fixed top-0 left-0 h-[3px] z-[60]" style="width:0%; background: linear-gradient(90deg, #8b6bff, #3fe0d0);"></div>
+
+<!-- ============ HERO ============ -->
+<section id="home" class="relative min-h-screen flex items-center pt-32 pb-20 px-6 md:px-10 overflow-hidden">
+  <div class="blob w-[500px] h-[500px] bg-violet -top-40 -left-32"></div>
+  <div class="blob w-[420px] h-[420px] bg-cyan top-1/3 -right-20"></div>
+
+  <div class="max-w-7xl mx-auto w-full relative z-10 grid md:grid-cols-[1.3fr_0.7fr] gap-14 items-center">
+    <div>
+      <div id="hero-eyebrow" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs tag text-cyan mb-8 opacity-0">
+        <span class="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse"></span>
+        AVAILABLE FOR OPPORTUNITIES · GUJRANWALA, PK
+      </div>
+
+      <h1 class="font-display font-semibold text-[13vw] leading-[0.95] md:text-[5.2rem] md:leading-[0.95] tracking-tight">
+        <div class="overflow-hidden"><span class="hero-line inline-block">Muhammad</span></div>
+        <div class="overflow-hidden"><span class="hero-line inline-block gradient-text">Moeez</span></div>
+      </h1>
+
+      <p id="hero-sub" class="mt-8 max-w-xl text-lg text-muted leading-relaxed opacity-0">
+        A Deep Learning &amp; Full-Stack developer who builds end-to-end products —
+        from NumPy-only neural nets to production-ready web apps — aimed at
+        creating sustainable, scalable systems that create real impact.
+      </p>
+
+      <div id="hero-cta" class="mt-10 flex flex-wrap items-center gap-4 opacity-0">
+        <a href="#projects" class="btn-primary text-white px-7 py-3.5 rounded-full text-sm font-semibold inline-flex items-center gap-2 hover:scale-[1.03] transition-transform">
+          View Projects
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://github.com/moeezmalik10" target="_blank" rel="noopener" class="px-7 py-3.5 rounded-full text-sm font-semibold border border-line glass hover:border-violet transition-colors inline-flex items-center gap-2">
+          <i class="devicon-github-original text-lg"></i> GitHub
+        </a>
+      </div>
+
+      <div id="hero-stats" class="mt-14 flex flex-wrap gap-10 opacity-0">
+        <div>
+          <p class="font-display text-3xl font-semibold">9+</p>
+          <p class="text-xs tag text-muted mt-1">PUBLIC REPOSITORIES</p>
+        </div>
+        <div>
+          <p class="font-display text-3xl font-semibold">2</p>
+          <p class="text-xs tag text-muted mt-1">CORE DISCIPLINES</p>
+        </div>
+        <div>
+          <p class="font-display text-3xl font-semibold">3</p>
+          <p class="text-xs tag text-muted mt-1">COMPETITIVE PLATFORMS</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="hero-portrait" class="opacity-0 justify-self-center">
+      <div class="relative w-56 h-56 md:w-72 md:h-72">
+        <div class="absolute inset-0 rounded-[2.5rem] rotate-6 bg-gradient-to-br from-violet/40 to-cyan/30 blur-sm"></div>
+        <div class="relative w-full h-full rounded-[2.5rem] overflow-hidden glass">
+          <img src="https://avatars.githubusercontent.com/u/170174525?v=4" alt="Muhammad Moeez" class="w-full h-full object-cover" />
+        </div>
+        <div class="absolute -bottom-5 -left-5 glass rounded-2xl px-4 py-3 text-xs tag">
+          <span class="text-cyan">&lt;/&gt;</span> AI &amp; Web Dev
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#about" class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted text-xs tag animate-bounce">
+    SCROLL
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<!-- ============ MARQUEE STRIP ============ -->
+<div class="relative border-y border-line py-4 overflow-hidden bg-surface/60">
+  <div class="marquee-track gap-16 text-muted text-sm tag whitespace-nowrap">
+    <div class="flex gap-16">
+      <span>DEEP LEARNING</span><span class="text-violet">✦</span>
+      <span>COMPUTER VISION</span><span class="text-cyan">✦</span>
+      <span>REACT &amp; NODE</span><span class="text-violet">✦</span>
+      <span>FLUTTER</span><span class="text-cyan">✦</span>
+      <span>PYTORCH &amp; TENSORFLOW</span><span class="text-violet">✦</span>
+      <span>FULL-STACK ENGINEERING</span><span class="text-cyan">✦</span>
+    </div>
+    <div class="flex gap-16" aria-hidden="true">
+      <span>DEEP LEARNING</span><span class="text-violet">✦</span>
+      <span>COMPUTER VISION</span><span class="text-cyan">✦</span>
+      <span>REACT &amp; NODE</span><span class="text-violet">✦</span>
+      <span>FLUTTER</span><span class="text-cyan">✦</span>
+      <span>PYTORCH &amp; TENSORFLOW</span><span class="text-violet">✦</span>
+      <span>FULL-STACK ENGINEERING</span><span class="text-cyan">✦</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="relative py-32 px-6 md:px-10">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-[0.4fr_0.6fr] gap-16">
+    <div class="section-fade">
+      <p class="tag text-cyan mb-4">01 · ABOUT</p>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold leading-tight">
+        Building things<br /> that <span class="gradient-text">think</span> and<br /> things that <span class="gradient-text">ship</span>.
+      </h2>
+    </div>
+    <div class="section-fade space-y-6 text-muted text-lg leading-relaxed">
+      <p>
+        I'm Muhammad Moeez, a developer based in Gujranwala, Pakistan, currently
+        pursuing a Bachelor of Information Technology at the
+        <span class="text-white">University of Gujrat</span>. My work sits at the
+        intersection of two disciplines: teaching machines to understand data,
+        and building the interfaces people actually use to interact with it.
+      </p>
+      <p>
+        On the AI side, I've implemented neural networks from scratch with
+        nothing but NumPy, and trained convolutional models like ResNet-18 for
+        real-world medical imaging problems. On the engineering side, I build
+        responsive front-ends with React, mobile apps with Flutter, and
+        backends with Node and Flask — end to end, from idea to deployment.
+      </p>
+      <div class="grid grid-cols-2 gap-6 pt-4">
+        <div class="glass rounded-2xl p-5">
+          <p class="text-white font-semibold mb-1">Focus</p>
+          <p class="text-sm">Deep Learning, Computer Vision &amp; Full-Stack Web/Mobile</p>
+        </div>
+        <div class="glass rounded-2xl p-5">
+          <p class="text-white font-semibold mb-1">Based in</p>
+          <p class="text-sm">Gujranwala, Punjab, Pakistan</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills" class="relative py-32 px-6 md:px-10 bg-surface/40 border-y border-line">
+  <div class="max-w-7xl mx-auto">
+    <div class="section-fade mb-16 max-w-2xl">
+      <p class="tag text-cyan mb-4">02 · SKILLS</p>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold leading-tight">What I work with</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Deep Learning Card -->
+      <div class="section-fade card-glow glass rounded-3xl p-9">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-11 h-11 rounded-xl bg-violet/15 flex items-center justify-center text-violet">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg>
+          </div>
+          <h3 class="font-display text-xl font-semibold">Deep Learning &amp; AI</h3>
+        </div>
+        <ul class="space-y-3 text-muted mb-7">
+          <li class="flex gap-3"><span class="text-cyan">→</span> Building models for deep learning &amp; statistical use cases</li>
+          <li class="flex gap-3"><span class="text-cyan">→</span> Computer vision &amp; NLP project experience</li>
+          <li class="flex gap-3"><span class="text-cyan">→</span> Quantitative modelling for forecasting &amp; time series</li>
+        </ul>
+        <div class="flex flex-wrap gap-3">
+          <span class="skill-chip flex items-center gap-2 px-3.5 py-2 rounded-full glass text-sm"><i class="devicon-tensorflow-original text-orange-400"></i>TensorFlow</span>
+          <span class="skill-chip flex items-center gap-2 px-3.5 py-2 rounded-full glass text-sm"><i class="devicon-keras-plain text-red-400"></i>Keras</span>
+          <span class="skill-chip flex items-center gap-2 px-3.5 py-2 rounded-full glass text-sm"><i class="devicon-pytorch-original text-orange-300"></i>PyTorch</span>
+          <span class="skill-chip flex items-center gap-2 px-3.5 py-2 rounded-full glass text-sm"><i class="devicon-python-plain text-yellow-300"></i>Python</span>
+          <span class="skill-chip flex items-center gap-2 px-3.5 py-2 rounded-full glass text-sm"><i class="devicon-numpy-original text-blue-300"></i>NumPy</span>
+        </div>
+      </div>
+
+      <!-- Full Stack Card -->
+      <div class="section-fade card-glow glass rounded-3xl p-9">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-11 h-11 rounded-xl bg-cyan/15 flex items-center justify-center text-cyan">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M8 4L2 12l6 8M16 4l6 8-6 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="font-display text-xl font-semibold">Full-Stack Development</h3>
+        </div>
+        <ul class="space-y-3 text-muted mb-7">
+          <li class="flex gap-3"><span class="text-violet">→</span> Responsive front-ends with React</li>
+          <li class="flex gap-3"><span class="text-violet">→</span> Mobile apps with Flutter, React Native &amp; Kotlin</li>
+          <li class="flex gap-3"><span class="text-violet">→</span> Backends in Node, Express &amp; Flask</li>
+        </ul>
+        <div class="flex flex-wrap gap-3">
+          <span class="skill-chip flex items-center gap-2 px-3.5 py-2 rounded-full glass text-sm"><i class="devicon-html5-plain text-orange-500"></i>HTML5</span>
+          <span class="skill-chip flex items-center gap-2 px-3.5 py-2 rounded-full glass text-sm"><i class="devicon-css3-plain text-blue-400"></i>CSS3</span>
+          <span class="skill-chip flex items-center gap-2 px-3.5 py-2 rounded-full glass text-sm"><i class="devicon-javascript-plain text-yellow-300"></i>JavaScript</span>
+          <span class="skill-chip flex items-center gap-2 px-3.5 py-2 rounded-full glass text-sm"><i class="devicon-react-original text-cyan-300"></i>React</span>
+          <span class="skill-chip flex items-center gap-2 px-3.5 py-2 rounded-full glass text-sm"><i class="devicon-nodejs-plain text-green-400"></i>Node.js</span>
+          <span class="skill-chip flex items-center gap-2 px-3.5 py-2 rounded-full glass text-sm"><i class="devicon-flutter-plain text-blue-300"></i>Flutter</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Competitive Sites -->
+    <div class="section-fade mt-8 glass rounded-3xl p-9 flex flex-col md:flex-row md:items-center gap-6 md:gap-0 justify-between">
+      <div>
+        <h3 class="font-display text-xl font-semibold mb-1">Sharpening the edge</h3>
+        <p class="text-muted text-sm">Solving problems consistently on competitive platforms</p>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <a href="https://leetcode.com/u/uPBsdbnJOS/" target="_blank" rel="noopener" class="flex items-center gap-2 px-5 py-3 rounded-full border border-line hover:border-violet transition-colors text-sm font-medium">
+          <i class="devicon-leetcode-plain text-yellow-400"></i> LeetCode
+        </a>
+        <a href="https://www.hackerrank.com/profile/malikmoeez152" target="_blank" rel="noopener" class="flex items-center gap-2 px-5 py-3 rounded-full border border-line hover:border-violet transition-colors text-sm font-medium">
+          <span class="text-green-400 font-bold">HR</span> HackerRank
+        </a>
+        <a href="https://www.kaggle.com/mrmoeez" target="_blank" rel="noopener" class="flex items-center gap-2 px-5 py-3 rounded-full border border-line hover:border-violet transition-colors text-sm font-medium">
+          <span class="text-cyan font-bold">K</span> Kaggle
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects" class="relative py-32 px-6 md:px-10">
+  <div class="max-w-7xl mx-auto">
+    <div class="section-fade mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div class="max-w-xl">
+        <p class="tag text-cyan mb-4">03 · PROJECTS</p>
+        <h2 class="font-display text-4xl md:text-5xl font-semibold leading-tight">Selected work</h2>
+      </div>
+      <p class="text-muted max-w-sm">
+        A mix of deep learning experiments and full-stack products — pulled
+        straight from active GitHub repositories.
+      </p>
+    </div>
+
+    <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Project 1 -->
+      <article class="project-card section-fade card-glow glass rounded-3xl p-7 flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between mb-5">
+            <span class="tag text-violet px-3 py-1 rounded-full border border-violet/30">MACHINE LEARNING</span>
+            <i class="devicon-numpy-original text-2xl text-blue-300"></i>
+          </div>
+          <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-violet transition-colors">Face Recognition System</h3>
+          <p class="text-muted text-sm leading-relaxed">
+            A from-scratch face recognition system built with a NumPy-only
+            multilayer perceptron — no deep learning frameworks, just linear
+            algebra and gradient descent, implemented by hand.
+          </p>
+        </div>
+        <div class="mt-7">
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="tag px-2.5 py-1 rounded-md bg-white/5 text-muted">Python</span>
+            <span class="tag px-2.5 py-1 rounded-md bg-white/5 text-muted">NumPy</span>
+            <span class="tag px-2.5 py-1 rounded-md bg-white/5 text-muted">Jupyter</span>
+          </div>
+          <a href="https://github.com/moeezmalik10/recognition-system" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-violet transition-colors">
+            View on GitHub
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="project-card section-fade card-glow glass rounded-3xl p-7 flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between mb-5">
+            <span class="tag text-cyan px-3 py-1 rounded-full border border-cyan/30">MEDICAL IMAGING</span>
+            <i class="devicon-pytorch-original text-2xl text-orange-300"></i>
+          </div>
+          <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-violet transition-colors">Alzheimer's Disease Detection</h3>
+          <p class="text-muted text-sm leading-relaxed">
+            A deep learning pipeline that classifies Alzheimer's disease
+            stages from brain MRI scans using a fine-tuned ResNet-18
+            convolutional network.
+          </p>
+        </div>
+        <div class="mt-7">
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="tag px-2.5 py-1 rounded-md bg-white/5 text-muted">Python</span>
+            <span class="tag px-2.5 py-1 rounded-md bg-white/5 text-muted">ResNet-18</span>
+            <span class="tag px-2.5 py-1 rounded-md bg-white/5 text-muted">Computer Vision</span>
+          </div>
+          <a href="https://github.com/moeezmalik10/Alzheimer-s-Disease-Detection-using-MRI-Images" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-violet transition-colors">
+            View on GitHub
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="project-card section-fade card-glow glass rounded-3xl p-7 flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between mb-5">
+            <span class="tag text-violet px-3 py-1 rounded-full border border-violet/30">FULL STACK</span>
+            <i class="devicon-typescript-plain text-2xl text-blue-400"></i>
+          </div>
+          <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-violet transition-colors">The Living Archive</h3>
+          <p class="text-muted text-sm leading-relaxed">
+            A platform for documenting discoveries and urban exploration —
+            built for explorers to log, tag, and share findings from
+            abandoned places and hidden spots.
+          </p>
+        </div>
+        <div class="mt-7">
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="tag px-2.5 py-1 rounded-md bg-white/5 text-muted">TypeScript</span>
+            <span class="tag px-2.5 py-1 rounded-md bg-white/5 text-muted">Web App</span>
+          </div>
+          <div class="flex items-center gap-5">
+            <a href="https://github.com/moeezmalik10/the-living-archive" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-violet transition-colors">
+              GitHub
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="https://the-living-archive-neon.vercel.app" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-medium text-cyan hover:text-white transition-colors">
+              Live Demo
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 4 -->
+      <article class="project-card section-fade card-glow glass rounded-3xl p-7 flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between mb-5">
+            <span class="tag text-cyan px-3 py-1 rounded-full border border-cyan/30">MANAGEMENT SYSTEM</span>
+            <i class="devicon-csharp-plain text-2xl text-purple-300"></i>
+          </div>
+          <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-violet transition-colors">SpinNSpice</h3>
+          <p class="text-muted text-sm leading-relaxed">
+            A restaurant management system for handling orders, menus, and
+            day-to-day operations end to end.
+          </p>
+        </div>
+        <div class="mt-7">
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="tag px-2.5 py-1 rounded-md bg-white/5 text-muted">C#</span>
+            <span class="tag px-2.5 py-1 rounded-md bg-white/5 text-muted">.NET</span>
+          </div>
+          <a href="https://github.com/moeezmalik10/SpinNSpice" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-violet transition-colors">
+            View on GitHub
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Project 5 -->
+      <article class="project-card section-fade card-glow glass rounded-3xl p-7 flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between mb-5">
+            <span class="tag text-violet px-3 py-1 rounded-full border border-violet/30">AI · EDTECH</span>
+            <i class="devicon-python-plain text-2xl text-yellow-300"></i>
+          </div>
+          <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-violet transition-colors">DirectionWise</h3>
+          <p class="text-muted text-sm leading-relaxed">
+            A career-counselling tool that helps students explore paths and
+            make informed decisions about their future.
+          </p>
+        </div>
+        <div class="mt-7">
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="tag px-2.5 py-1 rounded-md bg-white/5 text-muted">Python</span>
+            <span class="tag px-2.5 py-1 rounded-md bg-white/5 text-muted">Streamlit</span>
+          </div>
+          <div class="flex items-center gap-5">
+            <a href="https://github.com/moeezmalik10/directionwise" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-violet transition-colors">
+              GitHub
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="https://directionwise-jx2y43b9mxn9rtbnhgmqcw.streamlit.app/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-medium text-cyan hover:text-white transition-colors">
+              Live Demo
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 6 -->
+      <article class="project-card section-fade card-glow glass rounded-3xl p-7 flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between mb-5">
+            <span class="tag text-cyan px-3 py-1 rounded-full border border-cyan/30">FRONTEND</span>
+            <i class="devicon-javascript-plain text-2xl text-yellow-300"></i>
+          </div>
+          <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-violet transition-colors">NeoShop</h3>
+          <p class="text-muted text-sm leading-relaxed">
+            A demo e-commerce storefront showcasing product browsing, cart
+            interactions, and a clean, modern shopping UI.
+          </p>
+        </div>
+        <div class="mt-7">
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="tag px-2.5 py-1 rounded-md bg-white/5 text-muted">JavaScript</span>
+            <span class="tag px-2.5 py-1 rounded-md bg-white/5 text-muted">E-Commerce</span>
+          </div>
+          <div class="flex items-center gap-5">
+            <a href="https://github.com/moeezmalik10/NeoShop" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-violet transition-colors">
+              GitHub
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="https://neo-shop-eta.vercel.app" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-medium text-cyan hover:text-white transition-colors">
+              Live Demo
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section id="education" class="relative py-32 px-6 md:px-10 bg-surface/40 border-y border-line">
+  <div class="max-w-7xl mx-auto">
+    <div class="section-fade mb-16 max-w-2xl">
+      <p class="tag text-cyan mb-4">04 · EDUCATION</p>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold leading-tight">Academic path</h2>
+    </div>
+
+    <div class="relative pl-10 md:pl-16">
+      <div class="timeline-line absolute left-0 top-2 bottom-2 w-px"></div>
+
+      <div class="edu-item section-fade relative mb-16">
+        <span class="absolute -left-10 md:-left-16 top-1.5 w-3 h-3 rounded-full bg-violet ring-4 ring-violet/20"></span>
+        <p class="tag text-muted mb-2">2023 — 2027</p>
+        <h3 class="font-display text-2xl font-semibold mb-2">University of Gujrat</h3>
+        <p class="text-violet text-sm font-medium mb-4">Bachelor of Information Technology</p>
+        <p class="text-muted leading-relaxed max-w-2xl">
+          Coursework spanning Explainable AI, Graph Machine Learning and
+          Computer Vision. Also involved with the university's multimedia
+          department, working on documentary films and interviews.
+        </p>
+      </div>
+
+      <div class="edu-item section-fade relative">
+        <span class="absolute -left-10 md:-left-16 top-1.5 w-3 h-3 rounded-full bg-cyan ring-4 ring-cyan/20"></span>
+        <p class="tag text-muted mb-2">2021 — 2023</p>
+        <h3 class="font-display text-2xl font-semibold mb-2">Punjab College</h3>
+        <p class="text-cyan text-sm font-medium mb-4">Intermediate in Computer Science</p>
+        <p class="text-muted leading-relaxed max-w-2xl">
+          Core computer science foundations — Data Structures, Algorithms,
+          DBMS, Operating Systems and Computer Architecture — alongside
+          self-directed courses in Deep Learning, Data Science, Cloud
+          Computing and Full-Stack Development.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACHIEVEMENTS ============ -->
+<section id="achievements" class="relative py-32 px-6 md:px-10">
+  <div class="max-w-7xl mx-auto">
+    <div class="section-fade mb-16 max-w-2xl">
+      <p class="tag text-cyan mb-4">05 · ACHIEVEMENTS</p>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold leading-tight">Milestones so far</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="achievement-card section-fade card-glow glass rounded-3xl p-8">
+        <div class="w-11 h-11 rounded-xl bg-violet/15 flex items-center justify-center text-violet mb-5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.7 5.4 3 5.4 3a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <p class="font-display text-3xl font-semibold mb-1">9+</p>
+        <h3 class="font-semibold mb-2">Public Repositories</h3>
+        <p class="text-muted text-sm leading-relaxed">Shipped and open-sourced across machine learning, computer vision and full-stack web on GitHub.</p>
+      </div>
+
+      <div class="achievement-card section-fade card-glow glass rounded-3xl p-8">
+        <div class="w-11 h-11 rounded-xl bg-cyan/15 flex items-center justify-center text-cyan mb-5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 3H4v6M15 3h5v6M9 21H4v-6M15 21h5v-6M4 9l6 3-6 3M20 9l-6 3 6 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <p class="font-display text-3xl font-semibold mb-1">0 → 1</p>
+        <h3 class="font-semibold mb-2">Neural Net From Scratch</h3>
+        <p class="text-muted text-sm leading-relaxed">Implemented a multilayer perceptron for face recognition using nothing but NumPy — no PyTorch, no TensorFlow.</p>
+      </div>
+
+      <div class="achievement-card section-fade card-glow glass rounded-3xl p-8">
+        <div class="w-11 h-11 rounded-xl bg-violet/15 flex items-center justify-center text-violet mb-5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <p class="font-display text-3xl font-semibold mb-1">3</p>
+        <h3 class="font-semibold mb-2">Live Deployments</h3>
+        <p class="text-muted text-sm leading-relaxed">The Living Archive, NeoShop and DirectionWise — all built, deployed and publicly reachable today.</p>
+      </div>
+
+      <div class="achievement-card section-fade card-glow glass rounded-3xl p-8">
+        <div class="w-11 h-11 rounded-xl bg-cyan/15 flex items-center justify-center text-cyan mb-5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <p class="font-display text-3xl font-semibold mb-1">3</p>
+        <h3 class="font-semibold mb-2">Competitive Platforms</h3>
+        <p class="text-muted text-sm leading-relaxed">Active problem solver on LeetCode, HackerRank and Kaggle, sharpening fundamentals outside of coursework.</p>
+      </div>
+
+      <div class="achievement-card section-fade card-glow glass rounded-3xl p-8">
+        <div class="w-11 h-11 rounded-xl bg-violet/15 flex items-center justify-center text-violet mb-5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M23 7 16 12l7 5V7ZM1 5h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H1V5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <p class="font-display text-3xl font-semibold mb-1">Multimedia</p>
+        <h3 class="font-semibold mb-2">Documentary Contributor</h3>
+        <p class="text-muted text-sm leading-relaxed">Worked with University of Gujrat's multimedia department on documentary films and interviews.</p>
+      </div>
+
+      <div class="achievement-card section-fade card-glow glass rounded-3xl p-8 border-dashed border-2 border-line flex flex-col justify-center items-start">
+        <div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center text-muted mb-5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="font-semibold mb-2">More on the way</h3>
+        <p class="text-muted text-sm leading-relaxed">This spot is reserved for the next award, certification or milestone — updated as they happen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="relative py-32 px-6 md:px-10 overflow-hidden">
+  <div class="blob w-[450px] h-[450px] bg-violet bottom-0 left-1/3"></div>
+
+  <div class="max-w-4xl mx-auto text-center relative z-10">
+    <p class="section-fade tag text-cyan mb-5">06 · CONTACT</p>
+    <h2 class="section-fade font-display text-5xl md:text-7xl font-semibold leading-[1.05] mb-8">
+      Let's build something<br /><span class="gradient-text">worth shipping.</span>
+    </h2>
+    <p class="section-fade text-muted text-lg max-w-xl mx-auto mb-12">
+      Open to internships, collaborations and interesting problems in AI or
+      full-stack engineering. Reach out — I usually reply within a day.
+    </p>
+
+    <div class="section-fade flex flex-wrap items-center justify-center gap-3 mb-14">
+      <a href="mailto:malikmoeez152@gmail.com" class="btn-primary magnetic-btn inline-flex items-center gap-3 text-white px-8 py-[1.125rem] rounded-full text-base font-semibold hover:scale-[1.03] transition-transform">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="m3 7 9 6 9-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        malikmoeez152@gmail.com
+      </a>
+      <button id="copy-email-btn" data-email="malikmoeez152@gmail.com" title="Copy email address" aria-label="Copy email address" class="w-[54px] h-[54px] shrink-0 rounded-full glass border border-line hover:border-violet transition-colors flex items-center justify-center">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <a href="https://wa.me/923076138900" target="_blank" rel="noopener" class="magnetic-btn inline-flex items-center gap-3 px-8 py-[1.125rem] rounded-full text-base font-semibold border border-line glass hover:border-[#25D366] transition-colors">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.486 2 2 6.486 2 12.004c0 1.94.545 3.802 1.583 5.415L2 22l4.696-1.532A9.94 9.94 0 0 0 12.004 22C17.522 22 22 17.522 22 12.004 22 6.486 17.522 2 12.004 2zm0 18.185a8.14 8.14 0 0 1-4.15-1.135l-.298-.177-2.784.909.925-2.716-.194-.28a8.15 8.15 0 0 1-1.283-4.782c0-4.509 3.673-8.181 8.185-8.181 4.508 0 8.18 3.672 8.18 8.181 0 4.51-3.672 8.181-8.18 8.181z"/></svg>
+        Chat on WhatsApp
+      </a>
+    </div>
+
+    <!-- Direct contact form -->
+    <form id="contact-form" class="section-fade glass rounded-3xl p-8 md:p-10 text-left max-w-2xl mx-auto">
+      <p class="tag text-muted mb-6 text-center">OR SEND A MESSAGE DIRECTLY</p>
+      <div class="grid sm:grid-cols-2 gap-5 mb-5">
+        <div>
+          <label class="text-xs tag text-muted block mb-2">YOUR NAME</label>
+          <input id="cf-name" type="text" required placeholder="Jane Doe"
+            class="w-full bg-white/5 border border-line focus:border-violet rounded-xl px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted/50" />
+        </div>
+        <div>
+          <label class="text-xs tag text-muted block mb-2">YOUR EMAIL</label>
+          <input id="cf-email" type="email" required placeholder="jane@example.com"
+            class="w-full bg-white/5 border border-line focus:border-violet rounded-xl px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted/50" />
+        </div>
+      </div>
+      <div class="mb-6">
+        <label class="text-xs tag text-muted block mb-2">MESSAGE</label>
+        <textarea id="cf-message" required rows="4" placeholder="What would you like to build together?"
+          class="w-full bg-white/5 border border-line focus:border-violet rounded-xl px-4 py-3 text-sm outline-none transition-colors resize-none placeholder:text-muted/50"></textarea>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button type="submit" data-via="email" class="magnetic-btn flex-1 btn-primary text-white px-6 py-3.5 rounded-full text-sm font-semibold inline-flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="m3 7 9 6 9-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Send via Email
+        </button>
+        <button type="submit" data-via="whatsapp" class="magnetic-btn flex-1 px-6 py-3.5 rounded-full text-sm font-semibold border border-line hover:border-[#25D366] transition-colors inline-flex items-center justify-center gap-2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.486 2 2 6.486 2 12.004c0 1.94.545 3.802 1.583 5.415L2 22l4.696-1.532A9.94 9.94 0 0 0 12.004 22C17.522 22 22 17.522 22 12.004 22 6.486 17.522 2 12.004 2zm0 18.185a8.14 8.14 0 0 1-4.15-1.135l-.298-.177-2.784.909.925-2.716-.194-.28a8.15 8.15 0 0 1-1.283-4.782c0-4.509 3.673-8.181 8.185-8.181 4.508 0 8.18 3.672 8.18 8.181 0 4.51-3.672 8.181-8.18 8.181z"/></svg>
+          Send via WhatsApp
+        </button>
+      </div>
+      <p id="cf-hint" class="text-xs text-muted text-center mt-4">Opens your email client or WhatsApp with your message pre-filled — nothing is stored on this site.</p>
+    </form>
+
+    <div class="section-fade flex items-center justify-center gap-4 mt-14">
+      <a href="https://github.com/moeezmalik10" target="_blank" rel="noopener" class="w-12 h-12 rounded-full glass flex items-center justify-center hover:border-violet hover:-translate-y-1 transition-all border border-transparent"><i class="devicon-github-original text-lg"></i></a>
+      <a href="https://www.linkedin.com/in/muhammad-moeez-malik/" target="_blank" rel="noopener" class="w-12 h-12 rounded-full glass flex items-center justify-center hover:border-violet hover:-translate-y-1 transition-all border border-transparent text-blue-400"><i class="devicon-linkedin-plain text-lg"></i></a>
+      <a href="https://wa.me/923076138900" target="_blank" rel="noopener" class="w-12 h-12 rounded-full glass flex items-center justify-center hover:border-violet hover:-translate-y-1 transition-all border border-transparent">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.486 2 2 6.486 2 12.004c0 1.94.545 3.802 1.583 5.415L2 22l4.696-1.532A9.94 9.94 0 0 0 12.004 22C17.522 22 22 17.522 22 12.004 22 6.486 17.522 2 12.004 2zm0 18.185a8.14 8.14 0 0 1-4.15-1.135l-.298-.177-2.784.909.925-2.716-.194-.28a8.15 8.15 0 0 1-1.283-4.782c0-4.509 3.673-8.181 8.185-8.181 4.508 0 8.18 3.672 8.18 8.181 0 4.51-3.672 8.181-8.18 8.181z"/></svg>
+      </a>
+      <a href="https://twitter.com/_mr_malik___" target="_blank" rel="noopener" class="w-12 h-12 rounded-full glass flex items-center justify-center hover:border-violet hover:-translate-y-1 transition-all border border-transparent">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.9h3.7l-8 9.2 9.5 12.1h-7.4l-5.8-7.6-6.6 7.6H.6l8.6-9.9L0 1.9h7.6l5.3 6.9zm-1.3 19h2L6.5 4h-2.2z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/mr.malik.333/" target="_blank" rel="noopener" class="w-12 h-12 rounded-full glass flex items-center justify-center hover:border-violet hover:-translate-y-1 transition-all border border-transparent text-blue-500"><i class="devicon-facebook-plain text-lg"></i></a>
+      <a href="https://www.instagram.com/_mrmalik.10/" target="_blank" rel="noopener" class="w-12 h-12 rounded-full glass flex items-center justify-center hover:border-violet hover:-translate-y-1 transition-all border border-transparent text-pink-400"><i class="devicon-instagram-plain text-lg"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-line py-8 px-6 md:px-10">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted">
+    <p>© <span id="year"></span> Muhammad Moeez. All rights reserved.</p>
+    <p class="tag">DESIGNED &amp; BUILT WITH GSAP + TAILWIND</p>
+    <a href="#home" class="hover:text-white transition-colors">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById("menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+    mobileMenu.classList.toggle("flex");
+  });
+  mobileMenu.querySelectorAll("a").forEach((a) =>
+    a.addEventListener("click", () => {
+      mobileMenu.classList.add("hidden");
+      mobileMenu.classList.remove("flex");
+    })
+  );
+
+  // Nav background on scroll
+  const nav = document.getElementById("site-nav");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 40) {
+      nav.classList.add("glass");
+    } else {
+      nav.classList.remove("glass");
+    }
+  });
+
+  // Cursor glow (desktop)
+  const cursorGlow = document.getElementById("cursor-glow");
+  window.addEventListener("mousemove", (e) => {
+    cursorGlow.style.left = e.clientX + "px";
+    cursorGlow.style.top = e.clientY + "px";
+  });
+
+  // Card glow follow-mouse
+  document.querySelectorAll(".card-glow").forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty("--x", `${e.clientX - rect.left}px`);
+      card.style.setProperty("--y", `${e.clientY - rect.top}px`);
+    });
+  });
+
+  // ============ GSAP ANIMATIONS ============
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero intro timeline
+  const heroTl = gsap.timeline({ defaults: { ease: "power4.out" } });
+  heroTl
+    .fromTo(".hero-line", { yPercent: 130 }, { yPercent: 0, duration: 1.1, stagger: 0.12 })
+    .to("#hero-eyebrow", { opacity: 1, y: 0, duration: 0.6 }, "-=0.9")
+    .fromTo("#hero-eyebrow", { y: 20 }, { y: 0, duration: 0.6 }, "<")
+    .to("#hero-sub", { opacity: 1, duration: 0.8 }, "-=0.5")
+    .fromTo("#hero-sub", { y: 20 }, { y: 0, duration: 0.8 }, "<")
+    .to("#hero-cta", { opacity: 1, y: 0, duration: 0.7 }, "-=0.5")
+    .fromTo("#hero-cta", { y: 20 }, { y: 0, duration: 0.7 }, "<")
+    .fromTo("#hero-portrait", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 1 }, "-=0.9")
+    .to("#hero-stats", { opacity: 1, y: 0, duration: 0.7 }, "-=0.5")
+    .fromTo("#hero-stats", { y: 20 }, { y: 0, duration: 0.7 }, "<");
+
+  // Blob drift
+  gsap.to(".blob", {
+    x: "random(-60,60)",
+    y: "random(-60,60)",
+    duration: 10,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut",
+    stagger: { each: 2, from: "random" },
+  });
+
+  // Generic scroll reveal for anything with .section-fade
+  gsap.utils.toArray(".section-fade").forEach((el) => {
+    gsap.to(el, {
+      opacity: 1,
+      y: 0,
+      duration: 0.9,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: el,
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
+    });
+  });
+
+  // Project cards stagger
+  gsap.fromTo(
+    "#projects-grid .project-card",
+    { opacity: 0, y: 50 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.12,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: "#projects-grid",
+        start: "top 80%",
+      },
+    }
+  );
+
+  // Skill chips subtle pop-in
+  gsap.utils.toArray(".skill-chip").forEach((chip, i) => {
+    gsap.fromTo(
+      chip,
+      { opacity: 0, scale: 0.8 },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.4,
+        delay: (i % 8) * 0.04,
+        ease: "back.out(2)",
+        scrollTrigger: {
+          trigger: chip,
+          start: "top 95%",
+        },
+      }
+    );
+  });
+
+  // Timeline items
+  gsap.utils.toArray(".edu-item").forEach((item) => {
+    gsap.fromTo(
+      item,
+      { opacity: 0, x: -30 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: { trigger: item, start: "top 85%" },
+      }
+    );
+  });
+
+  // Section headings letter-spacing pop on scroll (nice touch on h2s)
+  gsap.utils.toArray("section h2").forEach((h) => {
+    gsap.fromTo(
+      h,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        ease: "power3.out",
+        scrollTrigger: { trigger: h, start: "top 88%" },
+      }
+    );
+  });
+
+  // Smooth anchor scrolling with offset for fixed nav
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        e.preventDefault();
+        gsap.to(window, {
+          duration: 1,
+          scrollTo: { y: target, offsetY: 70 },
+          ease: "power3.inOut",
+        });
+      }
+    });
+  });
+
+  // Scroll progress bar
+  const progressBar = document.getElementById("scroll-progress");
+  window.addEventListener("scroll", () => {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    progressBar.style.width = pct + "%";
+  });
+
+  // Magnetic buttons
+  document.querySelectorAll(".magnetic-btn").forEach((btn) => {
+    const xTo = gsap.quickTo(btn, "x", { duration: 0.4, ease: "power3" });
+    const yTo = gsap.quickTo(btn, "y", { duration: 0.4, ease: "power3" });
+    btn.addEventListener("mousemove", (e) => {
+      const rect = btn.getBoundingClientRect();
+      xTo((e.clientX - rect.left - rect.width / 2) * 0.25);
+      yTo((e.clientY - rect.top - rect.height / 2) * 0.25);
+    });
+    btn.addEventListener("mouseleave", () => {
+      xTo(0);
+      yTo(0);
+    });
+  });
+
+  // Copy email button
+  const copyBtn = document.getElementById("copy-email-btn");
+  const copyIcon = copyBtn.innerHTML;
+  const checkIcon =
+    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  copyBtn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(copyBtn.dataset.email);
+    } catch (err) {
+      /* clipboard unavailable — button still gives visual feedback */
+    }
+    copyBtn.classList.add("copied");
+    copyBtn.innerHTML = checkIcon;
+    setTimeout(() => {
+      copyBtn.classList.remove("copied");
+      copyBtn.innerHTML = copyIcon;
+    }, 1800);
+  });
+
+  // ============ CONTACT FORM (email / whatsapp, no backend) ============
+  const contactForm = document.getElementById("contact-form");
+  const cfHint = document.getElementById("cf-hint");
+  const cfDefaultHint = cfHint.textContent;
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = document.getElementById("cf-name").value.trim();
+    const email = document.getElementById("cf-email").value.trim();
+    const message = document.getElementById("cf-message").value.trim();
+
+    if (!name || !email || !message) {
+      cfHint.textContent = "Please fill in your name, email and message first.";
+      cfHint.classList.add("text-red-400");
+      return;
+    }
+    cfHint.classList.remove("text-red-400");
+    cfHint.textContent = cfDefaultHint;
+
+    const via = e.submitter ? e.submitter.dataset.via : "email";
+    if (via === "whatsapp") {
+      const text = encodeURIComponent(`Hi Moeez, I'm ${name} (${email}).\n\n${message}`);
+      window.open(`https://wa.me/923076138900?text=${text}`, "_blank");
+    } else {
+      const subject = encodeURIComponent(`Portfolio message from ${name}`);
+      const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+      window.location.href = `mailto:malikmoeez152@gmail.com?subject=${subject}&body=${body}`;
+    }
+  });
+
+  // ============ INTERACTIVE PET + AI ASSISTANT ("BYTE") ============
+  const petBtn = document.getElementById("pet-btn");
+  const chatPanel = document.getElementById("chat-panel");
+  const chatClose = document.getElementById("chat-close");
+  const chatForm = document.getElementById("chat-form");
+  const chatInput = document.getElementById("chat-input");
+  const chatMessages = document.getElementById("chat-messages");
+  const petBubble = document.getElementById("pet-bubble");
+  const petBubbleText = document.getElementById("pet-bubble-text");
+  let chatStarted = false;
+
+  // Idle bob + periodic blink
+  gsap.to("#pet-btn", { y: -6, duration: 1.8, repeat: -1, yoyo: true, ease: "sine.inOut" });
+  setInterval(() => {
+    gsap.to(".pet-eye", { scaleY: 0.1, duration: 0.08, yoyo: true, repeat: 1, transformOrigin: "center" });
+  }, 3200 + Math.random() * 2000);
+
+  // Eyes track the cursor
+  document.addEventListener("mousemove", (e) => {
+    document.querySelectorAll(".pet-eye").forEach((eye) => {
+      const rect = eye.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const angle = Math.atan2(e.clientY - cy, e.clientX - cx);
+      const dist = Math.min(2.2, Math.hypot(e.clientX - cx, e.clientY - cy) / 24);
+      const pupil = eye.querySelector(".pet-pupil");
+      pupil.style.transform = `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist}px)`;
+    });
+  });
+
+  // Speech bubble tips
+  const petTips = [
+    "Try asking me about Moeez's projects!",
+    "Psst — I know his skills, education & achievements too.",
+    "Click me anytime you have a question 👋",
+    "Want his contact info? Just ask.",
+  ];
+  let bubbleTimeout;
+  function showBubble(text) {
+    petBubbleText.textContent = text;
+    gsap.to(petBubble, { opacity: 1, y: 0, duration: 0.4 });
+    clearTimeout(bubbleTimeout);
+    bubbleTimeout = setTimeout(hideBubble, 4500);
+  }
+  function hideBubble() {
+    gsap.to(petBubble, { opacity: 0, y: 8, duration: 0.3 });
+  }
+  setTimeout(() => showBubble(petTips[0]), 3000);
+  setInterval(() => {
+    if (chatPanel.classList.contains("hidden")) {
+      showBubble(petTips[Math.floor(Math.random() * petTips.length)]);
+    }
+  }, 16000);
+
+  // Chat open/close
+  function openChat() {
+    chatPanel.classList.remove("hidden");
+    chatPanel.classList.add("flex");
+    hideBubble();
+    if (!chatStarted) {
+      chatStarted = true;
+      addChatMessage(
+        "bot",
+        "Hi, I'm Byte 👋 Ask me anything about Moeez — skills, projects, education, achievements, or how to reach him."
+      );
+    }
+    gsap.fromTo(chatPanel, { opacity: 0, y: 16, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "power2.out" });
+    chatInput.focus();
+  }
+  function closeChat() {
+    gsap.to(chatPanel, {
+      opacity: 0,
+      y: 16,
+      scale: 0.96,
+      duration: 0.25,
+      ease: "power2.in",
+      onComplete: () => {
+        chatPanel.classList.add("hidden");
+        chatPanel.classList.remove("flex");
+      },
+    });
+  }
+  petBtn.addEventListener("click", () => {
+    gsap.fromTo("#pet-face", { scale: 1 }, { scale: 1.15, duration: 0.15, yoyo: true, repeat: 1, ease: "power1.inOut" });
+    if (chatPanel.classList.contains("hidden")) {
+      openChat();
+    } else {
+      closeChat();
+    }
+  });
+  chatClose.addEventListener("click", closeChat);
+
+  // Chat messages
+  function addChatMessage(sender, text) {
+    const row = document.createElement("div");
+    row.className = `chat-msg-row ${sender}`;
+    const bubble = document.createElement("div");
+    bubble.className = `chat-msg ${sender}`;
+    bubble.textContent = text;
+    row.appendChild(bubble);
+    chatMessages.appendChild(row);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  function showTyping() {
+    const row = document.createElement("div");
+    row.className = "chat-msg-row bot";
+    row.id = "typing-indicator";
+    row.innerHTML = '<div class="chat-msg bot"><span class="typing-dots"><span></span><span></span><span></span></span></div>';
+    chatMessages.appendChild(row);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  function hideTyping() {
+    document.getElementById("typing-indicator")?.remove();
+  }
+
+  // Rule-based knowledge base — grounded only in facts shown on this page
+  const petKB = [
+    { keys: ["skill", "tech", "stack", "language", "tool", "framework"], a: "Moeez works across two lanes: Deep Learning & AI (TensorFlow, PyTorch, Keras, Python, NumPy) and Full-Stack Development (React, Node.js, Flutter, HTML/CSS/JS). Check the Skills section for the full breakdown." },
+    { keys: ["project", "work", "build", "portfolio", "repo", "app"], a: "A few favorites: a face recognition system built with NumPy only, an Alzheimer's detector using ResNet-18, and full-stack apps like NeoShop and The Living Archive. Scroll to Projects to see all six with live links." },
+    { keys: ["education", "study", "university", "college", "degree", "school"], a: "He's pursuing a Bachelor of Information Technology at University of Gujrat (2023–2027), after an Intermediate in Computer Science at Punjab College (2021–2023)." },
+    { keys: ["experience", "job", "intern", "career", "history"], a: "Moeez is currently focused on building projects and studying rather than a formal work history — and he's open to internships and collaborations, so feel free to reach out!" },
+    { keys: ["achievement", "accomplish", "award", "certificat", "milestone"], a: "Highlights include 9+ public repos, a neural net built entirely from scratch with NumPy, and 3 live deployed apps. See the Achievements section for the full list." },
+    { keys: ["leetcode", "hackerrank", "kaggle", "competitive"], a: "He's active on LeetCode, HackerRank and Kaggle — links are in the Skills section." },
+    { keys: ["whatsapp"], a: "You can reach him on WhatsApp right from the Contact section below, or use the contact form to send a message that opens pre-filled in WhatsApp." },
+    { keys: ["email", "mail"], a: "His email is malikmoeez152@gmail.com — there's a one-click button (and a copy icon) in the Contact section." },
+    { keys: ["contact", "reach", "hire", "talk", "message", "get in touch"], a: "Best ways to reach him: email at malikmoeez152@gmail.com, WhatsApp, or the contact form — all in the Contact section below." },
+    { keys: ["location", "where", "from", "live", "based", "country"], a: "He's based in Gujranwala, Punjab, Pakistan." },
+    { keys: ["who are you", "what are you", "are you real", "ai model", "gpt", "chatgpt", "language model"], a: "I'm Byte — a small scripted assistant built into this site, not a live language model. I know the facts on this page. For anything deeper, the Contact section will get you straight to Moeez." },
+    { keys: ["linkedin"], a: "You can find him on LinkedIn as Muhammad Moeez Malik — the icon is right in the Contact section." },
+    { keys: ["github"], a: "His GitHub is github.com/moeezmalik10 — 9 public repos spanning ML and full-stack work." },
+    { keys: ["hi", "hello", "hey", "yo", "salam"], a: "Hey! Ask me about Moeez's skills, projects, education, achievements, or how to reach him." },
+    { keys: ["thank"], a: "You're welcome! Anything else you'd like to know about Moeez?" },
+  ];
+  function answerAbout(raw) {
+    const q = raw.toLowerCase();
+    for (const entry of petKB) {
+      if (entry.keys.some((k) => q.includes(k))) return entry.a;
+    }
+    return "I don't have a scripted answer for that yet — try asking about his skills, projects, education, achievements, or use the Contact section to ask Moeez directly.";
+  }
+
+  chatForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const text = chatInput.value.trim();
+    if (!text) return;
+    addChatMessage("user", text);
+    chatInput.value = "";
+    showTyping();
+    setTimeout(() => {
+      hideTyping();
+      addChatMessage("bot", answerAbout(text));
+    }, 550 + Math.random() * 500);
+  });
+</script>
+
+<!-- ScrollToPlugin for smooth anchor nav -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollToPlugin);
+</script>
+</body>
+</html>
