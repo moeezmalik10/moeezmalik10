@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&amp;color=0:0f172a,100:1e293b&amp;height=200&amp;section=header&amp;text=Muhammad%20Moeez&amp;fontSize=42&amp;fontColor=ffffff&amp;animation=fadeIn&amp;fontAlignY=38&amp;desc=Deep%20Learning%20%26%20Full-Stack%20Developer&amp;descAlignY=58&amp;descSize=18" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&amp;color=0:0f172a,100:1e293b&amp;height=200&amp;section=header&amp;text=Muhammad%20Moeez&amp;fontSize=42&amp;fontColor=ffffff&amp;animation=fadeIn&amp;fontAlignY=38&amp;desc=Deep%20Learning%20and%20Full-Stack%20Developer&amp;descAlignY=58&amp;descSize=18" width="100%"/>
 
 <a href="https://moeez-portfolio-psi.vercel.app/">
   <img src="https://readme-typing-svg.demolab.com/?lines=Deep+Learning+%26+Computer+Vision;NumPy-only+Neural+Nets;Next.js+%2B+Flutter+%2B+Flask;Building+things+that+ship.&amp;font=Fira+Code&amp;center=true&amp;width=520&amp;height=45&amp;color=38BDF8&amp;vCenter=true&amp;size=20&amp;pause=1500&amp;duration=3000" />
